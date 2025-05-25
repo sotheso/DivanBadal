@@ -1,20 +1,95 @@
 //
-//  HafezQListView.swift
-//  Divan
+//  SearchView.swift
+//  DivanBadal
 //
 //  Created by Sothesom on 21/12/1403.
 //
 
 import SwiftUI
 
+// کامپوننت جدید برای نمایش کارت کتاب در صفحه جستجو
+struct SearchBookCardView: View {
+    let book: Book
+    @Environment(\.colorScheme) var colorScheme
+    
+    var body: some View {
+        ZStack(alignment: .center) {
+            // Book Image with fallback
+            if let uiImage = UIImage(named: book.imageName) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 160, height: 240)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            } else {
+                Image("‌Book1")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 160, height: 240)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+            
+            // Text
+            VStack(spacing: 4) {
+                Text(book.title)
+                    .font(.headline)
+                    .fontWeight(.medium)
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                    .shadow(color: .black.opacity(0.5), radius: 2, x: 0, y: 1)
+                
+                Text(book.author)
+                    .font(.subheadline)
+                    .foregroundStyle(.white.opacity(0.9))
+                    .lineLimit(1)
+                    .shadow(color: .black.opacity(0.5), radius: 2, x: 0, y: 1)
+            }
+            .padding(.horizontal, 8)
+            .padding(.bottom, 8)
+        }
+        .frame(width: 160, height: 240)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .shadow(
+            color: Color("AccentColor").opacity(0.3),
+            radius: 8,
+            x: 0,
+            y: 4
+        )
+    }
+}
+
 struct SearchView: View {
-    @StateObject private var poemModel = PoemModel()
+    @StateObject private var bookModel = BookModel()
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) private var dismiss
     var selectedCategory: PoemCategory?
+    @State private var searchText = ""
     
     init(selectedCategory: PoemCategory? = nil) {
         self.selectedCategory = selectedCategory
+    }
+    
+    // تابع کمکی برای پیدا کردن شاعر مربوط به هر کتاب
+    private func getPoetForBook(_ book: Book) -> Poet? {
+        return Poet.samplePoets.first { $0.type == book.poetType }
+    }
+    
+    var filteredBooks: [Book] {
+        if searchText.isEmpty {
+            return selectedCategory != nil ? 
+                bookModel.books.filter { $0.category == selectedCategory } :
+                bookModel.books
+        } else {
+            let books = selectedCategory != nil ?
+                bookModel.books.filter { $0.category == selectedCategory } :
+                bookModel.books
+            
+            return books.filter {
+                $0.title.localizedCaseInsensitiveContains(searchText) ||
+                $0.author.localizedCaseInsensitiveContains(searchText) ||
+                $0.description.localizedCaseInsensitiveContains(searchText)
+            }
+        }
     }
     
     var body: some View {
@@ -29,14 +104,13 @@ struct SearchView: View {
                     Image(systemName: "magnifyingglass")
                         .foregroundStyle(Color("Color"))
                     
-                    TextField("Search in poems...", text: $poemModel.searchText)
+                    TextField("Search in books...", text: $searchText)
                         .textFieldStyle(.plain)
                         .submitLabel(.search)
                     
-                    if !poemModel.searchText.isEmpty {
+                    if !searchText.isEmpty {
                         Button(action: {
-                            poemModel.searchText = ""
-                            poemModel.search()
+                            searchText = ""
                         }) {
                             Image(systemName: "xmark.circle.fill")
                                 .foregroundStyle(Color("Color"))
@@ -53,18 +127,25 @@ struct SearchView: View {
                 .shadow(color: Color("AccentColor").opacity(0.3), radius: 4, x: 0, y: 2)
                 .padding()
                 
-                // دکمه تغییر شاعر
-                if selectedCategory == nil {
-                    poetSwitchButton
-                        .padding(.horizontal)
-                        .padding(.bottom)
-                }
-                
-                // نتایج جستجو
-                if poemModel.searchResults.isEmpty {
+                if filteredBooks.isEmpty {
                     emptyStateView
                 } else {
-                    searchResultsList
+                    ScrollView {
+                        LazyVGrid(columns: [
+                            GridItem(.flexible()),
+                            GridItem(.flexible())
+                        ], spacing: 16) {
+                            ForEach(filteredBooks) { book in
+                                if let poet = getPoetForBook(book) {
+                                    NavigationLink(destination: PoetProfileView(poet: poet)) {
+                                        SearchBookCardView(book: book)
+                                    }
+                                    .buttonStyle(.plain)
+                                }
+                            }
+                        }
+                        .padding()
+                    }
                 }
             }
         }
@@ -72,7 +153,7 @@ struct SearchView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text(selectedCategory?.displayName ?? "Search in Poems")
+                Text(selectedCategory?.displayName ?? "Search in Books")
                     .font(.headline)
                     .foregroundStyle(Color("Color"))
             }
@@ -88,120 +169,15 @@ struct SearchView: View {
                 }
             }
         }
-        .onAppear {
-            if let category = selectedCategory {
-                poemModel.selectedCategory = category
-                poemModel.loadPoems()
-            }
-        }
-        .onChange(of: poemModel.selectedCategory) {
-            poemModel.searchText = ""
-            poemModel.loadPoems()
-        }
-        .onChange(of: poemModel.searchText) {
-            poemModel.search()
-        }
-    }
-    
-    private var poetSwitchButton: some View {
-        Menu {
-            ForEach(PoemCategory.allCases) { category in
-                Button(action: {
-                    poemModel.selectedCategory = category
-                }) {
-                    Label(category.displayName, systemImage: category == poemModel.selectedCategory ? "checkmark" : "")
-                }
-            }
-        } label: {
-            HStack {
-                Image(systemName: "book.fill")
-                    .foregroundStyle(Color("Color"))
-                
-                Text(poemModel.selectedCategory.displayName)
-                    .fontWeight(.medium)
-                    .foregroundStyle(Color("Color"))
-                
-                Spacer()
-                
-                Image(systemName: "chevron.down")
-                    .foregroundStyle(Color("Color"))
-                    .font(.system(size: 14))
-            }
-            .padding(.horizontal, 16)
-            .frame(maxWidth: .infinity)
-            .frame(height: 50)
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(.ultraThinMaterial)
-                    .shadow(color: Color.gray.opacity(0.2), radius: 4, x: 0, y: 2)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color("Color").opacity(0.2), lineWidth: 1)
-                    )
-            )
-        }
-        .buttonStyle(.plain)
-    }
-    
-    private var searchResultsList: some View {
-        ScrollView {
-            LazyVStack(spacing: 16) {
-                ForEach(poemModel.searchResults) { poem in
-                    poemCard(poem)
-                        .onAppear {
-                            if poem.id == poemModel.searchResults.last?.id {
-                                poemModel.loadMoreContent()
-                            }
-                        }
-                }
-                
-                if poemModel.isLoading {
-                    ProgressView()
-                        .tint(Color("Color"))
-                        .frame(height: 50)
-                }
-            }
-            .padding()
-        }
-        .background(Color("Color Back"))
-    }
-    
-    private func poemCard(_ poem: Poem) -> some View {
-        NavigationLink(destination: DetailView(poem: poem, disableTopPadding: true)) {
-            VStack(alignment: .center, spacing: 12) {
-                Text(poem.title)
-                    .font(.headline)
-                    .foregroundStyle(colorScheme == .dark ? .black : .white)
-                    .lineLimit(1)
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: .infinity)
-                
-                Text(poem.content)
-                    .font(.body)
-                    .lineLimit(3)
-                    .foregroundStyle(colorScheme == .dark ? .black.opacity(0.8) : .white.opacity(0.8))
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: .infinity)
-            }
-            .frame(height: 120)
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(colorScheme == .dark ? .white : Color("Color"))
-            )
-            .shadow(color: Color("Color").opacity(0.2), radius: 8, x: 0, y: 4)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-        }
-        .buttonStyle(.plain)
     }
     
     private var emptyStateView: some View {
         VStack(spacing: 16) {
-            Image(systemName: "exclamationmark.magnifyingglass")
+            Image(systemName: "book.closed.fill")
                 .font(.system(size: 48))
                 .foregroundStyle(Color("Color"))
             
-            Text("Nothing found")
+            Text("No books found")
                 .font(.headline)
                 .foregroundStyle(Color("Color"))
             
@@ -215,4 +191,4 @@ struct SearchView: View {
     NavigationStack {
         SearchView()
     }
-}
+} 

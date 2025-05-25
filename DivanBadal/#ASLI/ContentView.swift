@@ -25,10 +25,6 @@ struct ContentView: View {
                             Label("Search", systemImage: "magnifyingglass")
                         }
 
-                    FalView()
-                        .tabItem {
-                            Label("Fal", systemImage: "sparkles.square.filled.on.square")
-                        }
 
                     SettingView()
                         .tabItem {
