@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct DivanBadalApp: App {
+    @State private var isLoggedIn: Bool = false
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if !isLoggedIn {
+                IntroView1(isLoggedIn: $isLoggedIn)
+            } else {
+                ContentView()
+            }
         }
     }
 }
