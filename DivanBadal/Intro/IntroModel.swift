@@ -16,26 +16,26 @@ enum IntroModel: String, CaseIterable{
     var title: String {
         switch self {
         case .page1:
-            LanguageManager.shared.localizedString(.welcome)
+            "Welcome to Divan"
         case .page2:
-            LanguageManager.shared.localizedString(.smartLibrary)
+            "Smart Library"
         case .page3:
-            LanguageManager.shared.localizedString(.community)
+            "Reader Community"
         case .page4:
-            LanguageManager.shared.localizedString(.selectLanguage)
+            "Select App Language"
         }
     }
     
     var subTitel: String {
         switch self {
         case .page1:
-            LanguageManager.shared.localizedString(.welcomeSubtitle)
+            "Experience the best reading journey with Divan"
         case .page2:
-            LanguageManager.shared.localizedString(.smartLibrarySubtitle)
+            "Access thousands of books in one app"
         case .page3:
-            LanguageManager.shared.localizedString(.communitySubtitle)
+            "Share your favorite books with friends"
         case .page4:
-            LanguageManager.shared.localizedString(.selectLanguageSubtitle)
+            "Please select your preferred language"
         }
     }
     

@@ -13,6 +13,7 @@ struct PoetProfileView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var showAlert = false
     @State private var isAddedToFavorites = false
+    @EnvironmentObject private var languageManager: LanguageManager
     
     var body: some View {
         ScrollView {
@@ -34,7 +35,7 @@ struct PoetProfileView: View {
                             Button(action: { dismiss() }) {
                                 HStack {
                                     Image(systemName: "chevron.backward")
-                                    Text("Back")
+                                    Text(languageManager.localizedString(.back))
                                 }
                                 .foregroundStyle(.white)
                                 .padding(8)
@@ -89,12 +90,11 @@ struct PoetProfileView: View {
                 
                 // Bio Section
                 VStack(alignment: .center, spacing: 12) {
-                    Text("Biography / زندگینامه")
+                    Text(languageManager.localizedString(.biography))
                         .font(.headline)
                         .foregroundStyle(Color("Color"))
                     
-                    
-                    Text(poet.bio)
+                    Text(poet.getBio(for: languageManager.currentLanguage))
                         .font(.body)
                         .multilineTextAlignment(.center)
                         .lineSpacing(8)
@@ -114,19 +114,21 @@ struct PoetProfileView: View {
         }
         .navigationBarHidden(true)
         .ignoresSafeArea(.all, edges: .top)
-        .alert(isAddedToFavorites ? "Added to Favorites" : "Removed from Favorites",
+        .alert(isAddedToFavorites ? languageManager.localizedString(.addedToFavorites) : languageManager.localizedString(.removedFromFavorites),
                isPresented: $showAlert) {
             Button("OK", role: .cancel) { }
         } message: {
             Text(isAddedToFavorites ?
-                 "\(poet.name) has been added to your favorite poets." :
-                    "\(poet.name) has been removed from your favorite poets.")
+                 "\(poet.name) \(languageManager.localizedString(.addedToFavorites))" :
+                    "\(poet.name) \(languageManager.localizedString(.removedFromFavorites))")
         }
+        .localized()
     }
 }
 
 #Preview {
     NavigationStack {
         PoetProfileView(poet: Poet.samplePoets[0])
+            .environmentObject(LanguageManager.shared)
     }
 } 

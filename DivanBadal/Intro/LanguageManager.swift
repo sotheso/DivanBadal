@@ -103,6 +103,7 @@ enum LocalizationKey {
     case rateApp
     case developedBy
     case appVersion
+    case biography
     
     func localizedString(for language: String) -> String {
         switch language {
@@ -239,9 +240,11 @@ enum LocalizationKey {
         case .rateApp:
             return "امتیاز به برنامه"
         case .developedBy:
-            return "توسعه‌دهنده: "
+            return "توسعه‌دهنده"
         case .appVersion:
             return "نسخه برنامه"
+        case .biography:
+            return "زندگینامه"
         }
     }
     
@@ -355,11 +358,11 @@ enum LocalizationKey {
         case .poetryDetails:
             return "Poetry Details"
         case .ganjor:
-            return "Ganjor"
+            return "Ganjoor"
         case .addedToFavorites:
-            return "Added to favorites"
+            return "Added to Favorites"
         case .removedFromFavorites:
-            return "Removed from favorites"
+            return "Removed from Favorites"
         case .appearance:
             return "App Appearance"
         case .personalization:
@@ -369,9 +372,11 @@ enum LocalizationKey {
         case .rateApp:
             return "Rate App"
         case .developedBy:
-            return "Developed by "
+            return "Developed By"
         case .appVersion:
             return "App Version"
+        case .biography:
+            return "Biography"
         }
     }
 } 

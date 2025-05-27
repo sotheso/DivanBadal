@@ -126,7 +126,7 @@ struct IntroView1: View {
             
             Spacer(minLength: 0)
             
-            Button(LanguageManager.shared.localizedString(.skip)) {
+            Button("Skip") {
                 withAnimation(.spring(duration: 0.5)) {
                     activePage = .page4
                 }
@@ -182,7 +182,7 @@ struct IntroView1: View {
                 activePage = activePage.nextPage
             }
         } label: {
-            Text(activePage == .page4 ? LanguageManager.shared.localizedString(.start) : LanguageManager.shared.localizedString(.continueButton))
+            Text(activePage == .page4 ? "Start" : "Continue")
                 .contentTransition(.identity)
                 .foregroundStyle(.black)
                 .frame(maxWidth: .infinity)
