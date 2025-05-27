@@ -11,6 +11,7 @@ import Foundation
 
 struct SettingView: View {
     @EnvironmentObject var appSettings: AppSettings
+    @EnvironmentObject private var languageManager: LanguageManager
     
     var body: some View {
         NavigationStack {
@@ -20,30 +21,30 @@ struct SettingView: View {
                     .ignoresSafeArea()
                 
                 List {
-                    Section(header: Text("App Appearance")) {
+                    Section(header: Text(languageManager.localizedString(.appearance))) {
                         Toggle(isOn: $appSettings.isDarkMode) {
-                            Label("Dark Mode", systemImage: "moon.fill")
+                            Label(languageManager.localizedString(.darkMode), systemImage: "moon.fill")
                                 .foregroundStyle(Color("Color"))
                         }
                     }
                     .listRowBackground(Color("Color Back"))
                     
-                    Section(header: Text("Personalization")) {
+                    Section(header: Text(languageManager.localizedString(.personalization))) {
                         NavigationLink(destination: FavoritePoetsView(poets: Poet.samplePoets)) {
-                            Label("Favorite Poets", systemImage: "heart.fill")
+                            Label(languageManager.localizedString(.favoritePoets), systemImage: "heart.fill")
                                 .foregroundStyle(Color("Color"))
                         }
                     }
                     .listRowBackground(Color("Color Back"))
                     
-                    Section(header: Text("About us")) {
+                    Section(header: Text(languageManager.localizedString(.about))) {
                         NavigationLink(destination: AboutUsView()) {
-                            Label("About us", systemImage: "info.circle.fill")
+                            Label(languageManager.localizedString(.about), systemImage: "info.circle.fill")
                                 .foregroundStyle(Color("Color"))
                         }
                         
                         Link(destination: URL(string: "https://apps.apple.com/app/idXXXXXXXXXX?action=write-review")!) {
-                            Label("Give Us a Rating", systemImage: "star.fill")
+                            Label(languageManager.localizedString(.rateApp), systemImage: "star.fill")
                                 .foregroundStyle(Color("Color"))
                         }
                     }
@@ -59,15 +60,18 @@ struct SettingView: View {
                 }
                 .padding(.bottom, 20)
             )
+            .localized()
         }
     }
 }
 
 struct FooterText: View {
+    @EnvironmentObject private var languageManager: LanguageManager
+    
     var body: some View {
         VStack(spacing: 4) {
             HStack(spacing: 4) {
-                Text("Developed by ")
+                Text(languageManager.localizedString(.developedBy))
                     .foregroundColor(.gray)
                     .font(.footnote)
                 
@@ -75,7 +79,7 @@ struct FooterText: View {
                     .foregroundColor(Color("Color"))
                     .font(.footnote)
             }
-            Text("App Version: 0.0.1")
+            Text("\(languageManager.localizedString(.appVersion)): 0.0.1")
                 .foregroundColor(.gray)
                 .font(.footnote)
         }
@@ -86,4 +90,5 @@ struct FooterText: View {
 #Preview {
     SettingView()
         .environmentObject(AppSettings())
+        .environmentObject(LanguageManager.shared)
 }

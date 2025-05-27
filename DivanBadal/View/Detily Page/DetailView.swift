@@ -14,6 +14,7 @@ struct DetailView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject private var languageManager: LanguageManager
     @State private var showSafari = false
     @State private var selectedURL: URL?
     @State private var isFavorite: Bool = false
@@ -74,7 +75,7 @@ struct DetailView: View {
                 Button(action: { dismiss() }) {
                     HStack(spacing: 4) {
                         Image(systemName: "chevron.backward")
-                        Text("Back")
+                        Text(languageManager.localizedString(.back))
                     }
                     .foregroundStyle(Color("Color"))
                 }
@@ -94,6 +95,7 @@ struct DetailView: View {
             // نمایش پیام تایید
             favoriteToastView
         )
+        .localized()
     }
     
     // MARK: - Subviews
@@ -136,7 +138,7 @@ struct DetailView: View {
             HStack(spacing: 16) {
                 ShareLink(item: "\(poem.title)\n\n\(poem.content)\n\nوزن: \(poem.vazn ?? "")") {
                     Label {
-                        Text("Share")
+                        Text(languageManager.localizedString(.share))
                             .font(.callout)
                     } icon: {
                         Image(systemName: "square.and.arrow.up")
@@ -151,7 +153,7 @@ struct DetailView: View {
                         savePoem()
                     }) {
                         Label {
-                            Text(isFavorite ? "Saved" : "Save")
+                            Text(isFavorite ? languageManager.localizedString(.saved) : languageManager.localizedString(.save))
                                 .font(.callout)
                         } icon: {
                             Image(systemName: isFavorite ? "bookmark.fill" : "bookmark")
@@ -182,7 +184,7 @@ struct DetailView: View {
             HStack(spacing: 4) {
                 Image(systemName: "info.circle")
                     .foregroundStyle(Color("Color"))
-                Text("Poetry details")
+                Text(languageManager.localizedString(.poetryDetails))
                     .font(.caption)
                     .foregroundStyle(Color("Color"))
             }
@@ -205,7 +207,7 @@ struct DetailView: View {
                     }
                 }) {
                     Label {
-                        Text("Ganjor")
+                        Text(languageManager.localizedString(.ganjor))
                             .font(.callout)
                     } icon: {
                         Image("gan")
@@ -226,7 +228,7 @@ struct DetailView: View {
                         action()
                     }
                 }) {
-                    Label("Back", systemImage: "arrow.counterclockwise")
+                    Label(languageManager.localizedString(.back), systemImage: "arrow.counterclockwise")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
@@ -241,7 +243,7 @@ struct DetailView: View {
                 VStack {
                     Spacer()
                     
-                    Text(isFavorite ? "Added to favorites" : "Removed from favorites")
+                    Text(isFavorite ? languageManager.localizedString(.addedToFavorites) : languageManager.localizedString(.removedFromFavorites))
                         .font(.footnote)
                         .padding()
                         .background(.regularMaterial)
@@ -292,5 +294,21 @@ struct SafariView: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {
         // No update needed
+    }
+}
+
+#Preview {
+    NavigationStack {
+        DetailView(
+            poem: Poem(
+                title: "غزل شماره ۱",
+                content: "الا یا ایها الساقی ادر کأسا و ناولها\nکه عشق آسان نمود اول ولی افتاد مشکل‌ها",
+                vazn: "مفاعیلن مفاعیلن مفاعیلن مفاعیلن",
+                poet: .hafez,
+                link1: "https://ganjoor.net/hafez/ghazal/sh1/",
+                link2: ""
+            )
+        )
+        .environmentObject(LanguageManager.shared)
     }
 }

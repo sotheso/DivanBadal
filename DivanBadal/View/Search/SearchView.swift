@@ -11,6 +11,7 @@ import SwiftUI
 struct SearchBookCardView: View {
     let book: Book
     @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject private var languageManager: LanguageManager
     
     var body: some View {
         ZStack(alignment: .center) {
@@ -62,6 +63,7 @@ struct SearchView: View {
     @StateObject private var bookModel = BookModel()
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var languageManager: LanguageManager
     var selectedCategory: PoemCategory?
     @State private var searchText = ""
     
@@ -104,7 +106,7 @@ struct SearchView: View {
                     Image(systemName: "magnifyingglass")
                         .foregroundStyle(Color("Color"))
                     
-                    TextField("Search in books...", text: $searchText)
+                    TextField(languageManager.localizedString(.searchPlaceholder), text: $searchText)
                         .textFieldStyle(.plain)
                         .submitLabel(.search)
                     
@@ -153,7 +155,7 @@ struct SearchView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text(selectedCategory?.displayName ?? "Search in Books")
+                Text(selectedCategory?.displayName ?? languageManager.localizedString(.search))
                     .font(.headline)
                     .foregroundStyle(Color("Color"))
             }
@@ -164,11 +166,12 @@ struct SearchView: View {
                 }) {
                     HStack(spacing: 4) {
                         Image(systemName: "chevron.left")
-                        Text("Back")
+                        Text(languageManager.localizedString(.back))
                     }
                 }
             }
         }
+        .localized()
     }
     
     private var emptyStateView: some View {
@@ -177,7 +180,7 @@ struct SearchView: View {
                 .font(.system(size: 48))
                 .foregroundStyle(Color("Color"))
             
-            Text("No books found")
+            Text(languageManager.localizedString(.noResults))
                 .font(.headline)
                 .foregroundStyle(Color("Color"))
             
@@ -190,5 +193,6 @@ struct SearchView: View {
 #Preview {
     NavigationStack {
         SearchView()
+            .environmentObject(LanguageManager.shared)
     }
 } 

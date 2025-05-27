@@ -60,12 +60,10 @@ class DivanDBModel {
         return results
     }
     
-    // برای تست اتصال
     func isDatabaseConnected() -> Bool {
         return db != nil
     }
     
-    // برای تست جستجو
     func searchGhazals(containing text: String) -> [String] {
         var results: [String] = []
         let queryString = "SELECT title FROM HafezQazal WHERE title LIKE ?"

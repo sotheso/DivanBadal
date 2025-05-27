@@ -10,6 +10,7 @@ import SwiftUI
 struct BookListView: View {
     @StateObject private var bookModel = BookModel()
     @State private var searchText = ""
+    @EnvironmentObject private var languageManager: LanguageManager
     var poet: Poet? = nil
     
     var filteredBooks: [Book] {
@@ -31,7 +32,7 @@ struct BookListView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(poet == nil ? "All Books" : "All Books \(poet!.name)")
+            Text(poet == nil ? languageManager.localizedString(.allBooks) : "\(languageManager.localizedString(.allBooks)) \(poet!.name)")
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundStyle(Color("Color"))
@@ -40,7 +41,8 @@ struct BookListView: View {
                 .padding(.bottom, -24)
             
             if filteredBooks.isEmpty {
-                Text("Sorry, no books were found")                    .foregroundStyle(.gray)
+                Text(languageManager.localizedString(.noBooksFound))
+                    .foregroundStyle(.gray)
                     .padding()
             } else {
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -54,11 +56,13 @@ struct BookListView: View {
             }
         }
         .padding(.top, 20)
+        .localized()
     }
 }
 
 struct BookCardView: View {
     let book: Book
+    @EnvironmentObject private var languageManager: LanguageManager
     
     private func getPoetForBook(_ book: Book) -> Poet? {
         return Poet.samplePoets.first { $0.type == book.poetType }
@@ -117,4 +121,5 @@ struct BookCardView: View {
 
 #Preview {
     BookListView()
+        .environmentObject(LanguageManager.shared)
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var settings: AppSettings
+    @EnvironmentObject private var languageManager: LanguageManager
     @State private var showAlarmView = false
     
     var body: some View {
@@ -61,11 +62,12 @@ struct HomeView: View {
         }
         .background(Color("Color Back"))
         .ignoresSafeArea(.container, edges: [.leading, .trailing])
-        .navigationTitle("دیوان شعر پارسی")
+        .navigationTitle(languageManager.localizedString(.home))
         .navigationBarTitleDisplayMode(.large)
         .sheet(isPresented: $showAlarmView) {
             AlarmView()
         }
+        .localized()
     }
 }
 

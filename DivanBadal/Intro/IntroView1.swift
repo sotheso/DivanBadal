@@ -11,19 +11,27 @@ struct IntroView1: View {
     
     @State private var showingLoginView = false
     @State private var activePage: IntroModel = .page1
+    @State private var selectedLanguage: String? = nil
     @Binding var isLoggedIn: Bool
+    @EnvironmentObject private var languageManager: LanguageManager
+    
+    let languages = ["فارسی", "English"]
     
     var body: some View {
         NavigationStack {
             GeometryReader {
                 let size = $0.size
                 
-                
                 VStack {
                     Spacer(minLength: 0)
                     IntroSymbolView(symbol: activePage.rawValue, config: .init(font: .system(size: 150, weight: .bold), frame: .init(width: 250, height: 200), radio:30, forgroudColor: .white))
                     
                     TexContents(size: size)
+                    
+                    if activePage == .page4 {
+                        LanguageSelectionView(selectedLanguage: $selectedLanguage, languages: languages)
+                            .padding(.vertical, 20)
+                    }
                     
                     Spacer(minLength: 0)
                     
@@ -51,6 +59,7 @@ struct IntroView1: View {
                     .ignoresSafeArea()
             }
         }
+        .localized()
     }
     
     @ViewBuilder
@@ -117,7 +126,7 @@ struct IntroView1: View {
             
             Spacer(minLength: 0)
             
-            Button("رد کردن") {
+            Button(LanguageManager.shared.localizedString(.skip)) {
                 withAnimation(.spring(duration: 0.5)) {
                     activePage = .page4
                 }
@@ -131,24 +140,59 @@ struct IntroView1: View {
     }
     
     @ViewBuilder
+    func LanguageSelectionView(selectedLanguage: Binding<String?>, languages: [String]) -> some View {
+        VStack(spacing: 15) {
+            ForEach(languages, id: \.self) { language in
+                Button {
+                    selectedLanguage.wrappedValue = language
+                    languageManager.currentLanguage = language
+                } label: {
+                    HStack {
+                        Text(language)
+                            .font(.title3)
+                            .foregroundColor(.white)
+                        
+                        Spacer()
+                        
+                        if selectedLanguage.wrappedValue == language {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.white)
+                        }
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(selectedLanguage.wrappedValue == language ? Color.white : Color.white.opacity(0.3), lineWidth: 2)
+                    )
+                }
+            }
+        }
+        .padding(.horizontal)
+    }
+    
+    @ViewBuilder
     func ContinueButton() -> some View {
         Button {
             if activePage == .page4 {
-                isLoggedIn = true
+                if selectedLanguage != nil {
+                    isLoggedIn = true
+                }
             } else {
                 activePage = activePage.nextPage
             }
         } label: {
-            Text(activePage == .page4 ? "شروع کنید" : "ادامه")
+            Text(activePage == .page4 ? LanguageManager.shared.localizedString(.start) : LanguageManager.shared.localizedString(.continueButton))
                 .contentTransition(.identity)
                 .foregroundStyle(.black)
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal)
                 .padding(.vertical, 12)
                 .frame(maxWidth: 370)
-                .background(.white)
+                .background(activePage == .page4 && selectedLanguage == nil ? Color.gray : Color.white)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
         }
+        .disabled(activePage == .page4 && selectedLanguage == nil)
         .padding(.bottom, 15)
         .animation(.smooth(duration: 0.5, extraBounce: 0), value: activePage)
     }
@@ -156,4 +200,5 @@ struct IntroView1: View {
 
 #Preview {
     IntroView1(isLoggedIn: .constant(false))
+        .environmentObject(LanguageManager.shared)
 }

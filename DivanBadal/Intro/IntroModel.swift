@@ -11,31 +11,31 @@ enum IntroModel: String, CaseIterable{
     case page1 = "book.fill"
     case page2 = "text.book.closed.fill"
     case page3 = "person.2.fill"
-    case page4 = "sparkles"
+    case page4 = "globe"
     
     var title: String {
         switch self {
         case .page1:
-            "به دیوان خوش آمدید"
+            LanguageManager.shared.localizedString(.welcome)
         case .page2:
-            "کتابخانه هوشمند"
+            LanguageManager.shared.localizedString(.smartLibrary)
         case .page3:
-            "جامعه کتابخوان"
+            LanguageManager.shared.localizedString(.community)
         case .page4:
-            "شروع کنید"
+            LanguageManager.shared.localizedString(.selectLanguage)
         }
     }
     
     var subTitel: String {
         switch self {
         case .page1:
-            "بهترین تجربه کتابخوانی را با دیوان تجربه کنید"
+            LanguageManager.shared.localizedString(.welcomeSubtitle)
         case .page2:
-            "دسترسی به هزاران کتاب در یک اپلیکیشن"
+            LanguageManager.shared.localizedString(.smartLibrarySubtitle)
         case .page3:
-            "با دوستان خود کتاب‌های مورد علاقه را به اشتراک بگذارید"
+            LanguageManager.shared.localizedString(.communitySubtitle)
         case .page4:
-            "همین حالا به جمع کتابخوانان دیوان بپیوندید"
+            LanguageManager.shared.localizedString(.selectLanguageSubtitle)
         }
     }
     
