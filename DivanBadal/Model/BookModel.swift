@@ -45,16 +45,16 @@ class BookModel: ObservableObject {
             
             switch category {
             case .hafezGhazal, .hafezGhete, .hafezRobaee:
-                poetName = "حافظ شیرازی"
+                poetName = "Hafez Shirazi"
                 year = 792
             case .saadiGhazal, .saadiBostan:
-                poetName = "سعدی شیرازی"
+                poetName = "Saadi Shirazi"
                 year = category == .saadiBostan ? 655 : 690
             case .molanaRobaee, .masnavi:
-                poetName = "مولانا جلال‌الدین بلخی"
+                poetName = "Molana Jalaluddin Balkhi"
                 year = 672
             case .babaTaherDoBeyti:
-                poetName = "باباطاهر عریان"
+                poetName = "BabaTaher Arian"
                 year = 1055
             }
             

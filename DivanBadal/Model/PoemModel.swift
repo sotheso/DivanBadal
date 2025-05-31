@@ -22,10 +22,10 @@ struct Poem: Identifiable, Equatable {
 }
 
 enum PoetType: String {
-    case hafez = "حافظ"
-    case babaTaher = "باباطاهر"
-    case saadi = "سعدی"
-    case molana = "مولانا"
+    case hafez = "Hafez"
+    case babaTaher = "BabaTaher"
+    case saadi = "Saadi"
+    case molana = "Molana"
 }
 
 // Add a new enum for poem categories
@@ -42,14 +42,14 @@ enum PoemCategory: String, CaseIterable, Identifiable {
     var id: String { self.rawValue }
     var displayName: String {
         switch self {
-        case .hafezGhazal: return "Hafez (غزلیات)"
-        case .hafezGhete: return "Hafez (قطعات)"
-        case .hafezRobaee: return "Hafez (رباعیات)"
-        case .saadiGhazal: return "Saadi (غزلیات)"
-        case .saadiBostan: return "Saadi (بوستان)"
-        case .molanaRobaee: return "Molana (رباعیات)"
-        case .babaTaherDoBeyti: return "BabaTaher (دوبیتی)"
-        case .masnavi: return "Molana (مثنوی)"
+        case .hafezGhazal: return "Hafez Ghazals"
+        case .hafezGhete: return "Hafez Poems"
+        case .hafezRobaee: return "Hafez Quatrains"
+        case .saadiGhazal: return "Saadi Ghazals"
+        case .saadiBostan: return "Saadi Bostan"
+        case .molanaRobaee: return "Molana Quatrains"
+        case .babaTaherDoBeyti: return "BabaTaher Couplets"
+        case .masnavi: return "Molana Masnavi"
         }
     }
     
