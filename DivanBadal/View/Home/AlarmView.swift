@@ -4,6 +4,7 @@ import UserNotifications
 struct AlarmView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var settings: AppSettings
+    @EnvironmentObject var languageManager: LanguageManager
     @State private var showWeekDaysPicker = false
     @State private var showPoetsPicker = false
     @State private var showTimePicker = false
@@ -263,4 +264,5 @@ struct AlarmView: View {
 #Preview {
     AlarmView()
         .environmentObject(AppSettings())
+        .environmentObject(LanguageManager.shared)
 } 

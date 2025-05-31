@@ -60,5 +60,6 @@ struct FavoritePoetsView: View {
 #Preview {
     NavigationStack {
         FavoritePoetsView(poets: Poet.samplePoets)
+            .environmentObject(LanguageManager.shared)
     }
 } 

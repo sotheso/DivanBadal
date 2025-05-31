@@ -20,4 +20,5 @@ struct IntroView0: View {
 // Update Preview
 #Preview {
     IntroView0(isLoggedIn: .constant(false))
+        .environmentObject(LanguageManager.shared)
 }

@@ -74,4 +74,5 @@ struct IntroSymbolView: View {
 
 #Preview {
     IntroSymbolView(symbol: "gearshape.fill", config: .init(font: .system(size: 100, weight: .bold), frame: CGSize(width: 250, height: 200), radio: 15, forgroudColor: .black))
+        .environmentObject(LanguageManager.shared)
 }

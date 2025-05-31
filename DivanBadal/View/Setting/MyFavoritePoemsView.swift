@@ -185,5 +185,6 @@ struct FilterChip: View {
 #Preview {
     NavigationView {
         MyFavoritePoemsView()
+            .environmentObject(LanguageManager.shared)
     }
 } 

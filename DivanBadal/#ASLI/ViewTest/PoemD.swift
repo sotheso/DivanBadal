@@ -15,4 +15,5 @@ struct PoemD: View {
 
 #Preview {
     PoemD()
+        .environmentObject(LanguageManager.shared)
 }
