@@ -40,35 +40,33 @@ class BookModel: ObservableObject {
             case .masnavi: jsonFileName = "masnavi"
             }
             
-            if Bundle.main.url(forResource: jsonFileName, withExtension: "json") != nil {
-                let poetName: String
-                let year: Int
-                
-                switch category {
-                case .hafezGhazal, .hafezGhete, .hafezRobaee:
-                    poetName = "حافظ شیرازی"
-                    year = 792
-                case .saadiGhazal, .saadiBostan:
-                    poetName = "سعدی شیرازی"
-                    year = category == .saadiBostan ? 655 : 690
-                case .molanaRobaee, .masnavi:
-                    poetName = "مولانا جلال‌الدین بلخی"
-                    year = 672
-                case .babaTaherDoBeyti:
-                    poetName = "باباطاهر عریان"
-                    year = 1055
-                }
-                
-                loadedBooks.append(Book(
-                    title: category.displayName,
-                    author: poetName,
-                    imageName: getBookImage(for: loadedBooks.count),
-                    description: "مجموعه \(category.displayName)",
-                    poetType: category.poetType,
-                    category: category,
-                    year: year
-                ))
+            let poetName: String
+            let year: Int
+            
+            switch category {
+            case .hafezGhazal, .hafezGhete, .hafezRobaee:
+                poetName = "حافظ شیرازی"
+                year = 792
+            case .saadiGhazal, .saadiBostan:
+                poetName = "سعدی شیرازی"
+                year = category == .saadiBostan ? 655 : 690
+            case .molanaRobaee, .masnavi:
+                poetName = "مولانا جلال‌الدین بلخی"
+                year = 672
+            case .babaTaherDoBeyti:
+                poetName = "باباطاهر عریان"
+                year = 1055
             }
+            
+            loadedBooks.append(Book(
+                title: category.displayName,
+                author: poetName,
+                imageName: getBookImage(for: loadedBooks.count),
+                description: "مجموعه \(category.displayName)",
+                poetType: category.poetType,
+                category: category,
+                year: year
+            ))
         }
         
         books = loadedBooks
