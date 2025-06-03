@@ -12,6 +12,7 @@ struct BookListView: View {
     @State private var searchText = ""
     @EnvironmentObject private var languageManager: LanguageManager
     var poet: Poet? = nil
+    var isInProfileView: Bool = false
     
     var filteredBooks: [Book] {
         var books = bookModel.books
@@ -48,7 +49,14 @@ struct BookListView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
                         ForEach(filteredBooks) { book in
-                            BookCardView(book: book)
+                            if isInProfileView {
+                                BookCardView(book: book)
+                            } else {
+                                NavigationLink(destination: PoetProfileView(poet: getPoetForBook(book)!)) {
+                                    BookCardView(book: book)
+                                }
+                                .buttonStyle(.plain)
+                            }
                         }
                     }
                 }
@@ -58,64 +66,59 @@ struct BookListView: View {
         .padding(.top, 20)
         .localized()
     }
+    
+    private func getPoetForBook(_ book: Book) -> Poet? {
+        return Poet.samplePoets.first { $0.type == book.poetType }
+    }
 }
 
 struct BookCardView: View {
     let book: Book
     @EnvironmentObject private var languageManager: LanguageManager
     
-    private func getPoetForBook(_ book: Book) -> Poet? {
-        return Poet.samplePoets.first { $0.type == book.poetType }
-    }
-    
     var body: some View {
-        if let poet = getPoetForBook(book) {
-            NavigationLink(destination: PoetProfileView(poet: poet)) {
-                ZStack(alignment: .center) {
-                    // Book Image with fallback
-                    if let uiImage = UIImage(named: book.imageName) {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 160, height: 240)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    } else {
-                        Image("‌Book1")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 160, height: 240)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    }
-                    
-                    // Text
-                    VStack(spacing: 4) {
-                        Text(book.title)
-                            .font(.headline)
-                            .fontWeight(.medium)
-                            .foregroundStyle(.white)
-                            .lineLimit(1)
-                            .shadow(color: .black.opacity(0.5), radius: 2, x: 0, y: 1)
-                        
-                        Text(book.author)
-                            .font(.subheadline)
-                            .foregroundStyle(.white.opacity(0.9))
-                            .lineLimit(1)
-                            .shadow(color: .black.opacity(0.5), radius: 2, x: 0, y: 1)
-                    }
-                    .padding(.horizontal, 8)
-                    .padding(.bottom, 8)
-                }
-                .frame(width: 160, height: 240)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .shadow(
-                    color: Color("AccentColor").opacity(0.3),
-                    radius: 8,
-                    x: 0,
-                    y: 4
-                )
+        ZStack(alignment: .center) {
+            // Book Image with fallback
+            if let uiImage = UIImage(named: book.imageName) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 160, height: 240)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            } else {
+                Image("‌Book1")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 160, height: 240)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
             }
-            .buttonStyle(.plain)
+            
+            // Text
+            VStack(spacing: 4) {
+                Text(book.title)
+                    .font(.headline)
+                    .fontWeight(.medium)
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                    .shadow(color: .black.opacity(0.5), radius: 2, x: 0, y: 1)
+                
+                Text(book.author)
+                    .font(.subheadline)
+                    .foregroundStyle(.white.opacity(0.9))
+                    .lineLimit(1)
+                    .shadow(color: .black.opacity(0.5), radius: 2, x: 0, y: 1)
+            }
+            .padding(.horizontal, 8)
+            .padding(.bottom, 8)
         }
+        .frame(width: 160, height: 240)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .shadow(
+            color: Color("AccentColor").opacity(0.3),
+            radius: 8,
+            x: 0,
+            y: 4
+        )
     }
 }
 

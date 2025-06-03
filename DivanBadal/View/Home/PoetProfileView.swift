@@ -107,7 +107,7 @@ struct PoetProfileView: View {
                 .padding(.horizontal)
                 
                 // Books Section
-                BookListView(poet: poet)
+                BookListView(poet: poet, isInProfileView: true)
                     .padding(.horizontal)
             }
             .padding(.bottom, 20)
