@@ -48,7 +48,7 @@ enum PoemCategory: String, CaseIterable, Identifiable {
         case .saadiGhazal: return "Saadi Ghazals"
         case .saadiBostan: return "Saadi Bostan"
         case .molanaRobaee: return "Molana Quatrains"
-        case .babaTaherDoBeyti: return "BabaTaher Couplets"
+        case .babaTaherDoBeyti: return "BabaTaher 2beyti"
         case .masnavi: return "Molana Masnavi"
         }
     }
