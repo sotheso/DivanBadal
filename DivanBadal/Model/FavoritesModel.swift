@@ -39,25 +39,57 @@ class SimpleFavoriteManager: ObservableObject {
     }
 }
 
-class FavoritesViewModel: ObservableObject {
+class FavoritesModel: ObservableObject {
     @Published var poems: [Poem] = []
     private let model = PoemModel()
+    private let favoriteManager = SimpleFavoriteManager.shared
     
     init() {
         loadPoems()
     }
     
     func loadPoems() {
-        model.selectedPoet = .hafez
-        let hafezPoems = model.readHafezData()
+        model.selectedPoet = .cervantes
+        let cervantesPoems = model.readCervantesDonQuixoteData() + model.readCervantesNovelasData()
         
-        model.selectedPoet = .babaTaher
-        let babaTaherPoems = model.readBabaTaherData()
+        model.selectedPoet = .shakespeare
+        let shakespearePoems = model.readShakespeareHamletData() + model.readShakespeareMacbethData()
         
-        poems = hafezPoems + babaTaherPoems
+        model.selectedPoet = .keats
+        let keatsPoems = model.readKeatsOdesData() + model.readKeatsEndymionData()
+        
+        model.selectedPoet = .dante
+        let dantePoems = model.readDanteDivineComedyData() + model.readDanteVitaNuovaData()
+        
+        model.selectedPoet = .baudelaire
+        let baudelairePoems = model.readBaudelaireFleursData() + model.readBaudelaireSpleenData()
+        
+        model.selectedPoet = .neruda
+        let nerudaPoems = model.readNerudaVeintePoemasData() + model.readNerudaCantoGeneralData()
+        
+        model.selectedPoet = .garcia
+        let garciaPoems = model.readGarciaLorcaBodasData() + model.readGarciaLorcaYermaData()
+        
+        model.selectedPoet = .valery
+        let valeryPoems = model.readValeryCimetiereData() + model.readValeryCharmesData()
+        
+        poems = cervantesPoems + shakespearePoems + keatsPoems + dantePoems + 
+                baudelairePoems + nerudaPoems + garciaPoems + valeryPoems
     }
     
-    func findPoemById(_ id: String) -> Poem? {
-        poems.first(where: { $0.title == id })
+    func toggleFavorite(_ poem: Poem) {
+        if favoriteManager.isFavorite(poem.title) {
+            favoriteManager.removeFavorite(poem.title)
+        } else {
+            favoriteManager.addFavorite(poem.title)
+        }
+    }
+    
+    func isFavorite(_ poem: Poem) -> Bool {
+        favoriteManager.isFavorite(poem.title)
+    }
+    
+    func getFavoritePoems() -> [Poem] {
+        poems.filter { favoriteManager.isFavorite($0.title) }
     }
 } 

@@ -30,15 +30,7 @@ class BookModel: ObservableObject {
         for category in PoemCategory.allCases {
             let jsonFileName: String
             switch category {
-            case .hafezGhazal: jsonFileName = "HafezQazal"
-            case .hafezGhete: jsonFileName = "HafezGhete"
-            case .hafezRobaee: jsonFileName = "HafezRobaee"
-            case .saadiGhazal: jsonFileName = "SaadiQazal"
-            case .saadiBostan: jsonFileName = "Saad‌iBostan"
-            case .molanaRobaee: jsonFileName = "DivnanShamsRobaee"
-            case .babaTaherDoBeyti: jsonFileName = "BabaTaher2B"
-            case .masnavi: jsonFileName = "masnavi"
-            // New books for foreign poets
+            // Foreign poets books
             case .cervantesDonQuixote: jsonFileName = "DonQuixote"
             case .cervantesNovelas: jsonFileName = "Novelas"
             case .shakespeareHamlet: jsonFileName = "Hamlet"
@@ -61,19 +53,7 @@ class BookModel: ObservableObject {
             let year: Int
             
             switch category {
-            case .hafezGhazal, .hafezGhete, .hafezRobaee:
-                poetName = "Hafez Shirazi"
-                year = 792
-            case .saadiGhazal, .saadiBostan:
-                poetName = "Saadi Shirazi"
-                year = category == .saadiBostan ? 655 : 690
-            case .molanaRobaee, .masnavi:
-                poetName = "Molana Jalaluddin Balkhi"
-                year = 672
-            case .babaTaherDoBeyti:
-                poetName = "BabaTaher Arian"
-                year = 1055
-            // New cases for foreign poets
+            // Foreign poets cases
             case .cervantesDonQuixote, .cervantesNovelas:
                 poetName = "Miguel de Cervantes"
                 year = category == .cervantesDonQuixote ? 1605 : 1613

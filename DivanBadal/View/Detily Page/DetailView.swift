@@ -304,7 +304,7 @@ struct SafariView: UIViewControllerRepresentable {
                 title: "غزل شماره ۱",
                 content: "الا یا ایها الساقی ادر کأسا و ناولها\nکه عشق آسان نمود اول ولی افتاد مشکل‌ها",
                 vazn: "مفاعیلن مفاعیلن مفاعیلن مفاعیلن",
-                poet: .hafez,
+                poet: .dante,
                 link1: "https://ganjoor.net/hafez/ghazal/sh1/",
                 link2: ""
             )

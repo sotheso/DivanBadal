@@ -100,7 +100,7 @@ struct MyFavoritePoemsView: View {
                                 title: poem.title,
                                 content: poem.content,
                                 vazn: poem.vazn,
-                                poet: PoetType(rawValue: poem.poet) ?? .hafez,
+                                poet: PoetType(rawValue: poem.poet) ?? .dante,
                                 link1: poem.link1 ?? "",
                                 link2: poem.link2 ?? ""
                             ),

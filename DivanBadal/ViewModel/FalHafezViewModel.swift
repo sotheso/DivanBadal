@@ -4,7 +4,7 @@ class FalHafezViewModel: ObservableObject {
     private let model = PoemModel()
     @Published var selectedPoem: Poem?
     @Published var poems: [Poem] = []
-    @Published var selectedCategory: PoemCategory = .hafezGhazal {
+    @Published var selectedCategory: PoemCategory = .baudelaireFleurs {
         didSet { loadPoems() }
     }
     @Published var isLoading = false

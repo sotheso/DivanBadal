@@ -76,7 +76,7 @@ struct PoetProfileView: View {
                                             .foregroundStyle(.white)
                                     }
                                     
-                                    Text("\(poet.birthPlace) - \(poet.birthYear) تا \(poet.deathYear)")
+                                    Text("\(poet.birthPlace) - \(poet.birthYear) to \(poet.deathYear)")
                                         .font(.subheadline)
                                         .foregroundStyle(.white.opacity(0.9))
                                 }

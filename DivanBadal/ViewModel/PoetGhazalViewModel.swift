@@ -4,7 +4,7 @@ class PoetGhazalViewModel: ObservableObject {
     private let model = PoemModel()
     @Published var searchText = ""
     @Published var searchResults: [Poem] = []
-    @Published var selectedCategory: PoemCategory = .hafezGhazal {
+    @Published var selectedCategory: PoemCategory = .baudelaireFleurs {
         didSet { loadPoems() }
     }
     @Published var allPoems: [Poem] = []
