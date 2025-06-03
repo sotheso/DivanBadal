@@ -38,6 +38,23 @@ class BookModel: ObservableObject {
             case .molanaRobaee: jsonFileName = "DivnanShamsRobaee"
             case .babaTaherDoBeyti: jsonFileName = "BabaTaher2B"
             case .masnavi: jsonFileName = "masnavi"
+            // New books for foreign poets
+            case .cervantesDonQuixote: jsonFileName = "DonQuixote"
+            case .cervantesNovelas: jsonFileName = "Novelas"
+            case .shakespeareHamlet: jsonFileName = "Hamlet"
+            case .shakespeareMacbeth: jsonFileName = "Macbeth"
+            case .keatsOdes: jsonFileName = "KeatsOdes"
+            case .keatsEndymion: jsonFileName = "Endymion"
+            case .danteDivineComedy: jsonFileName = "DivineComedy"
+            case .danteVitaNuova: jsonFileName = "VitaNuova"
+            case .baudelaireFleurs: jsonFileName = "FleursDuMal"
+            case .baudelaireSpleen: jsonFileName = "SpleenDeParis"
+            case .nerudaVeintePoemas: jsonFileName = "VeintePoemas"
+            case .nerudaCantoGeneral: jsonFileName = "CantoGeneral"
+            case .garciaLorcaBodas: jsonFileName = "BodasDeSangre"
+            case .garciaLorcaYerma: jsonFileName = "Yerma"
+            case .valeryCimetiere: jsonFileName = "CimetiereMarin"
+            case .valeryCharmes: jsonFileName = "Charmes"
             }
             
             let poetName: String
@@ -56,6 +73,31 @@ class BookModel: ObservableObject {
             case .babaTaherDoBeyti:
                 poetName = "BabaTaher Arian"
                 year = 1055
+            // New cases for foreign poets
+            case .cervantesDonQuixote, .cervantesNovelas:
+                poetName = "Miguel de Cervantes"
+                year = category == .cervantesDonQuixote ? 1605 : 1613
+            case .shakespeareHamlet, .shakespeareMacbeth:
+                poetName = "William Shakespeare"
+                year = category == .shakespeareHamlet ? 1601 : 1606
+            case .keatsOdes, .keatsEndymion:
+                poetName = "John Keats"
+                year = category == .keatsOdes ? 1819 : 1818
+            case .danteDivineComedy, .danteVitaNuova:
+                poetName = "Dante Alighieri"
+                year = category == .danteDivineComedy ? 1320 : 1295
+            case .baudelaireFleurs, .baudelaireSpleen:
+                poetName = "Charles Baudelaire"
+                year = category == .baudelaireFleurs ? 1857 : 1869
+            case .nerudaVeintePoemas, .nerudaCantoGeneral:
+                poetName = "Pablo Neruda"
+                year = category == .nerudaVeintePoemas ? 1924 : 1950
+            case .garciaLorcaBodas, .garciaLorcaYerma:
+                poetName = "Federico García Lorca"
+                year = category == .garciaLorcaBodas ? 1933 : 1934
+            case .valeryCimetiere, .valeryCharmes:
+                poetName = "Paul Valéry"
+                year = category == .valeryCimetiere ? 1920 : 1922
             }
             
             loadedBooks.append(Book(
