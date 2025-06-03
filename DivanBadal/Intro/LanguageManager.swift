@@ -11,7 +11,7 @@ class LanguageManager: ObservableObject {
     }
     
     private init() {
-        self.currentLanguage = UserDefaults.standard.string(forKey: "AppLanguage") ?? "English"
+        self.currentLanguage = UserDefaults.standard.string(forKey: "AppLanguage") ?? "Turkish"
     }
     
     func localizedString(_ key: LocalizationKey) -> String {
@@ -47,7 +47,7 @@ enum LocalizationKey {
     case continueButton
     case start
     case skip
-    case persian
+    case turkish
     case english
     
     // Home
@@ -85,7 +85,7 @@ enum LocalizationKey {
     case language
     case notifications
     case darkMode
-    case about
+    case about 
     case help
     case logout
     
@@ -107,144 +107,144 @@ enum LocalizationKey {
     
     func localizedString(for language: String) -> String {
         switch language {
-        case "فارسی":
-            return persianString
+        case "Turkish":
+            return turkishString
         case "English":
             return englishString
         default:
-            return persianString
+            return turkishString
         }
     }
     
-    private var persianString: String {
+    private var turkishString: String {
         switch self {
         // Intro
         case .welcome:
-            return "به دیوان خوش آمدید"
+            return "Divan'a Hoş Geldiniz"
         case .smartLibrary:
-            return "کتابخانه هوشمند"
+            return "Akıllı Kütüphane"
         case .community:
-            return "جامعه کتابخوان"
+            return "Okuyucu Topluluğu"
         case .selectLanguage:
-            return "زبان برنامه را انتخاب کنید"
+            return "Uygulama Dilini Seçin"
         case .welcomeSubtitle:
-            return "بهترین تجربه کتابخوانی را با دیوان تجربه کنید"
+            return "Divan ile en iyi okuma deneyimini yaşayın"
         case .smartLibrarySubtitle:
-            return "دسترسی به هزاران کتاب در یک اپلیکیشن"
+            return "Binlerce kitaba tek uygulamadan erişin"
         case .communitySubtitle:
-            return "با دوستان خود کتاب‌های مورد علاقه را به اشتراک بگذارید"
+            return "Favori kitaplarınızı arkadaşlarınızla paylaşın"
         case .selectLanguageSubtitle:
-            return "لطفاً زبان مورد نظر خود را انتخاب کنید"
+            return "Lütfen tercih ettiğiniz dili seçin"
         case .continueButton:
-            return "ادامه"
+            return "Devam Et"
         case .start:
-            return "شروع کنید"
+            return "Başla"
         case .skip:
-            return "رد کردن"
-        case .persian:
-            return "فارسی"
+            return "Atla"
+        case .turkish:
+            return "Türkçe"
         case .english:
             return "English"
             
         // Home
         case .home:
-            return "خانه"
+            return "Ana Sayfa"
         case .search:
-            return "جستجو در کتاب‌ها"
+            return "Kitaplarda Ara"
         case .library:
-            return "کتابخانه"
+            return "Kütüphane"
         case .profile:
-            return "پروفایل"
+            return "Profil"
         case .newBooks:
-            return "کتاب‌های جدید"
+            return "Yeni Kitaplar"
         case .popularBooks:
-            return "کتاب‌های پرفروش"
+            return "Popüler Kitaplar"
         case .recommendedBooks:
-            return "پیشنهاد شده‌ها"
+            return "Önerilenler"
         case .seeAll:
-            return "مشاهده همه"
+            return "Tümünü Gör"
         case .allBooks:
-            return "همه کتاب‌ها"
+            return "Tüm Kitaplar"
         case .noBooksFound:
-            return "کتابی یافت نشد"
+            return "Kitap Bulunamadı"
             
         // Search
         case .searchPlaceholder:
-            return "جستجو در کتاب‌ها..."
+            return "Kitaplarda ara..."
         case .searchResults:
-            return "نتایج جستجو"
+            return "Arama Sonuçları"
         case .noResults:
-            return "نتیجه‌ای یافت نشد"
+            return "Sonuç Bulunamadı"
         case .categories:
-            return "دسته‌بندی‌ها"
+            return "Kategoriler"
         case .filters:
-            return "فیلترها"
+            return "Filtreler"
             
         // Detail Page
         case .bookDetails:
-            return "جزئیات کتاب"
+            return "Kitap Detayları"
         case .author:
-            return "نویسنده"
+            return "Yazar"
         case .publisher:
-            return "ناشر"
+            return "Yayınevi"
         case .publishDate:
-            return "تاریخ انتشار"
+            return "Yayın Tarihi"
         case .pages:
-            return "تعداد صفحات"
+            return "Sayfa Sayısı"
         case .description:
-            return "توضیحات"
+            return "Açıklama"
         case .readNow:
-            return "خواندن"
+            return "Oku"
         case .addToLibrary:
-            return "افزودن به کتابخانه"
+            return "Kütüphaneye Ekle"
         case .share:
-            return "اشتراک‌گذاری"
+            return "Paylaş"
             
         // Settings
         case .settings:
-            return "تنظیمات"
+            return "Ayarlar"
         case .language:
-            return "زبان"
+            return "Dil"
         case .notifications:
-            return "اعلان‌ها"
+            return "Bildirimler"
         case .darkMode:
-            return "حالت تاریک"
+            return "Karanlık Mod"
         case .about:
-            return "درباره ما"
+            return "Hakkımızda"
         case .help:
-            return "راهنما"
+            return "Yardım"
         case .logout:
-            return "خروج"
+            return "Çıkış"
             
         // New keys
         case .back:
-            return "بازگشت"
+            return "Geri"
         case .saved:
-            return "ذخیره شده"
+            return "Kaydedildi"
         case .save:
-            return "ذخیره"
+            return "Kaydet"
         case .poetryDetails:
-            return "جزئیات شعر"
+            return "Şiir Detayları"
         case .ganjor:
-            return "گنجور"
+            return "Ganjor"
         case .addedToFavorites:
-            return "به علاقه‌مندی‌ها اضافه شد"
+            return "Favorilere Eklendi"
         case .removedFromFavorites:
-            return "از علاقه‌مندی‌ها حذف شد"
+            return "Favorilerden Çıkarıldı"
         case .appearance:
-            return "ظاهر برنامه"
+            return "Görünüm"
         case .personalization:
-            return "شخصی‌سازی"
+            return "Kişiselleştirme"
         case .favoritePoets:
-            return "شاعران مورد علاقه"
+            return "Favori Şairler"
         case .rateApp:
-            return "امتیاز به برنامه"
+            return "Uygulamayı Değerlendir"
         case .developedBy:
-            return "توسعه‌دهنده"
+            return "Geliştirici"
         case .appVersion:
-            return "نسخه برنامه"
+            return "Uygulama Versiyonu"
         case .biography:
-            return "زندگینامه"
+            return "Biyografi"
         }
     }
     
@@ -273,8 +273,8 @@ enum LocalizationKey {
             return "Start"
         case .skip:
             return "Skip"
-        case .persian:
-            return "فارسی"
+        case .turkish:
+            return "Türkçe"
         case .english:
             return "English"
             

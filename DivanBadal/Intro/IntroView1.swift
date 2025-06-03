@@ -15,7 +15,7 @@ struct IntroView1: View {
     @Binding var isLoggedIn: Bool
     @EnvironmentObject private var languageManager: LanguageManager
     
-    let languages = ["فارسی", "English"]
+    let languages = ["Türkçe", "English"]
     
     var body: some View {
         NavigationStack {

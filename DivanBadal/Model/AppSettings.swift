@@ -4,7 +4,7 @@ class AppSettings: ObservableObject {
     @Published var isDarkMode = false
     @Published var fontSize: Double = 1.0
     @Published var isBoldFont = false
-    @Published var favoritePoet: String = "حافظ"
+    @Published var favoritePoet: String = "Dante"
     @Published var notificationsEnabled = false
     @Published var dailyNotification = false
     @Published var dailyReminderTime = Date()

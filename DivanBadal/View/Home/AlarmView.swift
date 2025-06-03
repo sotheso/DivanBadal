@@ -11,7 +11,7 @@ struct AlarmView: View {
     @State private var showNotificationPermissionAlert = false
     
     private let weekDays = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-    private let poets = ["حافظ", "سعدی", "مولانا","باباطاهر"]
+    private let poets = ["Cervantes", "Shakespeare", "Keats", "Dante", "Baudelaire", "Neruda", "García Lorca", "Valéry"]
     
     var selectedTimeText: String {
         let formatter = DateFormatter()
@@ -52,7 +52,7 @@ struct AlarmView: View {
                             // ایجاد محتوای اعلان
                             let content = UNMutableNotificationContent()
                             content.title = "Poem Reminder"
-                            content.body = "چی میگه \(poet) بزن بیا ببین"
+                            content.body = "Come and see what \(poet) thinks"
                             content.sound = .default
                             
                             // تنظیم زمان اعلان

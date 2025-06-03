@@ -5,7 +5,7 @@ struct Poet: Identifiable {
     let name: String
     let imageName: String
     let bioEnglish: String
-    let bioPersian: String
+    let bioTurkish: String
     let works: [String]
     let birthYear: Int
     let deathYear: Int
@@ -13,7 +13,7 @@ struct Poet: Identifiable {
     let type: PoetType
     
     func getBio(for language: String) -> String {
-        return language == "English" ? bioEnglish : bioPersian
+        return language == "English" ? bioEnglish : bioTurkish
     }
 }
 
@@ -23,7 +23,7 @@ extension Poet {
             name: "Miguel de Cervantes",
             imageName: "سروانتس",
             bioEnglish: "Spanish novelist, poet, and playwright. Best known for Don Quixote, considered the first modern European novel.",
-            bioPersian: "رمان‌نویس، شاعر و نمایشنامه‌نویس اسپانیایی. مشهورترین اثر او دن کیشوت است که اولین رمان مدرن اروپایی محسوب می‌شود.",
+            bioTurkish: "İspanyol romancı, şair ve oyun yazarı. En çok, ilk modern Avrupa romanı olarak kabul edilen Don Kişot ile tanınır.",
             works: ["Don Quixote", "Exemplary Novels"],
             birthYear: 1547,
             deathYear: 1616,
@@ -34,7 +34,7 @@ extension Poet {
             name: "William Shakespeare",
             imageName: "Sheks",
             bioEnglish: "English playwright and poet, widely regarded as the greatest writer in the English language.",
-            bioPersian: "نمایشنامه‌نویس و شاعر انگلیسی، که به عنوان بزرگترین نویسنده زبان انگلیسی شناخته می‌شود.",
+            bioTurkish: "İngiliz oyun yazarı ve şair, İngiliz dilinin en büyük yazarı olarak kabul edilir.",
             works: ["Hamlet", "Macbeth"],
             birthYear: 1564,
             deathYear: 1616,
@@ -45,7 +45,7 @@ extension Poet {
             name: "John Keats",
             imageName: "جان کیتس",
             bioEnglish: "English Romantic poet. His poetry is characterized by sensual imagery and is among the most popular of the Romantic movement.",
-            bioPersian: "شاعر رمانتیک انگلیسی. شعر او با تصاویر حسی مشخص می‌شود و از محبوب‌ترین آثار جنبش رمانتیک است.",
+            bioTurkish: "İngiliz Romantik şair. Şiirleri duyusal imgelerle karakterize edilir ve Romantik hareketin en popüler eserleri arasındadır.",
             works: ["Odes", "Endymion"],
             birthYear: 1795,
             deathYear: 1821,
@@ -56,7 +56,7 @@ extension Poet {
             name: "Dante Alighieri",
             imageName: "دانته آلیگیری",
             bioEnglish: "Italian poet, writer, and philosopher. Best known for The Divine Comedy, a masterpiece of world literature.",
-            bioPersian: "شاعر، نویسنده و فیلسوف ایتالیایی. مشهورترین اثر او کمدی الهی است که شاهکاری از ادبیات جهان محسوب می‌شود.",
+            bioTurkish: "İtalyan şair, yazar ve filozof. Dünya edebiyatının başyapıtlarından biri olan İlahi Komedya ile tanınır.",
             works: ["The Divine Comedy", "La Vita Nuova"],
             birthYear: 1265,
             deathYear: 1321,
@@ -67,7 +67,7 @@ extension Poet {
             name: "Charles Baudelaire",
             imageName: "شارل بودلر",
             bioEnglish: "French poet, translator, and critic. His most famous work, Les Fleurs du mal, expresses the changing nature of beauty in modern, industrializing Paris.",
-            bioPersian: "شاعر، مترجم و منتقد فرانسوی. مشهورترین اثر او، گل‌های بدی، بیانگر ماهیت متغیر زیبایی در پاریس مدرن و صنعتی است.",
+            bioTurkish: "Fransız şair, çevirmen ve eleştirmen. En ünlü eseri Kötülük Çiçekleri, modern, sanayileşen Paris'te güzelliğin değişen doğasını ifade eder.",
             works: ["Les Fleurs du mal", "Le Spleen de Paris"],
             birthYear: 1821,
             deathYear: 1867,
@@ -78,7 +78,7 @@ extension Poet {
             name: "Pablo Neruda",
             imageName: "پابلو نروا",
             bioEnglish: "Chilean poet and diplomat. Winner of the Nobel Prize in Literature in 1971. His poetry is known for its passionate love poems and political commitment.",
-            bioPersian: "شاعر و دیپلمات شیلیایی. برنده جایزه نوبل ادبیات در سال 1971. شعر او به خاطر اشعار عاشقانه پرشور و تعهد سیاسی شناخته شده است.",
+            bioTurkish: "Şilili şair ve diplomat. 1971'de Nobel Edebiyat Ödülü'nü kazandı. Şiirleri tutkulu aşk şiirleri ve politik bağlılığı ile tanınır.",
             works: ["Twenty Love Poems", "Canto General"],
             birthYear: 1904,
             deathYear: 1973,
@@ -89,7 +89,7 @@ extension Poet {
             name: "Federico García Lorca",
             imageName: "فدریکو گارسیا",
             bioEnglish: "Spanish poet, playwright, and theatre director. A member of the Generation of '27, he is considered one of the most important Spanish poets of the 20th century.",
-            bioPersian: "شاعر، نمایشنامه‌نویس و کارگردان تئاتر اسپانیایی. عضو نسل 27، او یکی از مهمترین شاعران اسپانیایی قرن بیستم محسوب می‌شود.",
+            bioTurkish: "İspanyol şair, oyun yazarı ve tiyatro yönetmeni. 27 Kuşağı'nın bir üyesi olarak, 20. yüzyılın en önemli İspanyol şairlerinden biri olarak kabul edilir.",
             works: ["Blood Wedding", "Yerma"],
             birthYear: 1898,
             deathYear: 1936,
@@ -100,7 +100,7 @@ extension Poet {
             name: "Paul Valéry",
             imageName: "پل والری",
             bioEnglish: "French poet, essayist, and philosopher. His poetry is characterized by its intellectual depth and formal perfection.",
-            bioPersian: "شاعر، مقاله‌نویس و فیلسوف فرانسوی. شعر او با عمق فکری و کمال صوری مشخص می‌شود.",
+            bioTurkish: "Fransız şair, deneme yazarı ve filozof. Şiirleri entelektüel derinliği ve biçimsel mükemmelliği ile karakterize edilir.",
             works: ["Le Cimetière marin", "Charmes"],
             birthYear: 1871,
             deathYear: 1945,
