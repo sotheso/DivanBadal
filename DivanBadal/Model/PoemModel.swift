@@ -26,6 +26,14 @@ enum PoetType: String {
     case babaTaher = "BabaTaher"
     case saadi = "Saadi"
     case molana = "Molana"
+    case cervantes = "Cervantes"
+    case shakespeare = "Shakespeare"
+    case keats = "Keats"
+    case dante = "Dante"
+    case baudelaire = "Baudelaire"
+    case neruda = "Neruda"
+    case garcia = "Garcia"
+    case valery = "Valery"
 }
 
 // Add a new enum for poem categories
