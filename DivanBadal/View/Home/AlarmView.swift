@@ -22,7 +22,7 @@ struct AlarmView: View {
     
     var selectedDaysText: String {
         if settings.selectedDays.isEmpty {
-            return "No day selected"
+            return languageManager.localizedString(.noDaySelected)
         } else {
             return settings.selectedDays.sorted().joined(separator: "، ")
         }
@@ -30,52 +30,41 @@ struct AlarmView: View {
     
     var selectedPoetsText: String {
         if settings.selectedPoets.isEmpty {
-            return "No poet selected"
+            return languageManager.localizedString(.noPoetSelected)
         } else {
             return settings.selectedPoets.sorted().joined(separator: "، ")
         }
     }
     
     func scheduleNotifications() {
-        // درخواست مجوز اعلان
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if granted {
-                // حذف اعلان‌های قبلی
                 UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                 
-                // اگر اعلان‌ها فعال هستند
                 if settings.notificationsEnabled {
-                    // برای هر روز انتخاب شده
                     for day in settings.selectedDays {
-                        // برای هر شاعر انتخاب شده
                         for poet in settings.selectedPoets {
-                            // ایجاد محتوای اعلان
                             let content = UNMutableNotificationContent()
-                            content.title = "Poem Reminder"
-                            content.body = "Come and see what \(poet) thinks"
+                            content.title = languageManager.localizedString(.poemReminder)
+                            content.body = String(format: languageManager.localizedString(.poetThoughts), poet)
                             content.sound = .default
                             
-                            // تنظیم زمان اعلان
                             let calendar = Calendar.current
                             var dateComponents = DateComponents()
                             dateComponents.hour = calendar.component(.hour, from: settings.dailyReminderTime)
                             dateComponents.minute = calendar.component(.minute, from: settings.dailyReminderTime)
                             
-                            // تبدیل نام روز به عدد
                             let dayNumber = weekDays.firstIndex(of: day)! + 1
                             dateComponents.weekday = dayNumber
                             
-                            // ایجاد trigger
                             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
                             
-                            // ایجاد درخواست اعلان
                             let request = UNNotificationRequest(
                                 identifier: "\(poet)-\(day)",
                                 content: content,
                                 trigger: trigger
                             )
                             
-                            // اضافه کردن درخواست به مرکز اعلان
                             UNUserNotificationCenter.current().add(request)
                         }
                     }
@@ -102,7 +91,7 @@ struct AlarmView: View {
                         }
                     )) {
                         Label {
-                            Text("Turn On Notifications")
+                            Text(languageManager.localizedString(.turnOnNotifications))
                         } icon: {
                             Image(systemName: settings.notificationsEnabled ? "bell.fill" : "bell")
                         }
@@ -110,7 +99,6 @@ struct AlarmView: View {
                 }
                 
                 Section {
-                    
                     DisclosureGroup(
                         isExpanded: $showTimePicker,
                         content: {
@@ -126,7 +114,7 @@ struct AlarmView: View {
                         },
                         label: {
                             HStack {
-                                Text("Notification Time")
+                                Text(languageManager.localizedString(.notificationTime))
                                 Spacer()
                                 Text(selectedTimeText)
                                     .foregroundStyle(.secondary)
@@ -135,12 +123,10 @@ struct AlarmView: View {
                     )
                     .disabled(!settings.notificationsEnabled)
                     .opacity(settings.notificationsEnabled ? 1.0 : 0.5)
-
                 }
                 
-                Section(header: Text("Days of the Week")) {
-                    
-                    Toggle("Daily Notification", isOn: Binding(
+                Section(header: Text(languageManager.localizedString(.daysOfWeek))) {
+                    Toggle(languageManager.localizedString(.dailyNotification), isOn: Binding(
                         get: { settings.dailyNotification },
                         set: { newValue in
                             settings.dailyNotification = newValue
@@ -190,7 +176,7 @@ struct AlarmView: View {
                         },
                         label: {
                             HStack {
-                                Text("Selected Days")
+                                Text(languageManager.localizedString(.selectedDays))
                                 Spacer()
                                 Text(selectedDaysText)
                                     .foregroundStyle(.secondary)
@@ -202,7 +188,7 @@ struct AlarmView: View {
                     .opacity(settings.notificationsEnabled ? 1.0 : 0.5)
                 }
                 
-                Section(header: Text("Favorite Poets")) {
+                Section(header: Text(languageManager.localizedString(.favoritePoets))) {
                     DisclosureGroup(
                         isExpanded: $showPoetsPicker,
                         content: {
@@ -230,7 +216,7 @@ struct AlarmView: View {
                         },
                         label: {
                             HStack {
-                                Text("Selected Poets")
+                                Text(languageManager.localizedString(.selectedPoets))
                                 Spacer()
                                 Text(selectedPoetsText)
                                     .foregroundStyle(.secondary)
@@ -242,7 +228,7 @@ struct AlarmView: View {
                     .opacity(settings.notificationsEnabled ? 1.0 : 0.5)
                 }
             }
-            .navigationTitle("Notification Settings")
+            .navigationTitle(languageManager.localizedString(.notificationSettings))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -252,11 +238,12 @@ struct AlarmView: View {
                     }
                 }
             }
-            .alert("Notification Access", isPresented: $showNotificationPermissionAlert) {
-                Button("OK", role: .cancel) { }
+            .alert(languageManager.localizedString(.notificationAccess), isPresented: $showNotificationPermissionAlert) {
+                Button(languageManager.localizedString(.ok), role: .cancel) { }
             } message: {
-                Text("To receive notifications, please enable notification access in your device settings.")
+                Text(languageManager.localizedString(.enableNotificationsMessage))
             }
+            .localized()
         }
     }
 }

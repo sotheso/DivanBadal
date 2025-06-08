@@ -104,6 +104,20 @@ enum LocalizationKey {
     case developedBy
     case appVersion
     case biography
+    case noDaySelected
+    case noPoetSelected
+    case poemReminder
+    case poetThoughts
+    case turnOnNotifications
+    case notificationTime
+    case daysOfWeek
+    case dailyNotification
+    case selectedDays
+    case selectedPoets
+    case notificationSettings
+    case notificationAccess
+    case ok
+    case enableNotificationsMessage
     
     func localizedString(for language: String) -> String {
         switch language {
@@ -245,6 +259,34 @@ enum LocalizationKey {
             return "Uygulama Versiyonu"
         case .biography:
             return "Biyografi"
+        case .noDaySelected:
+            return "Gün seçilmedi"
+        case .noPoetSelected:
+            return "Şair seçilmedi"
+        case .poemReminder:
+            return "Şiir Hatırlatıcı"
+        case .poetThoughts:
+            return "%@ ne düşünüyor, gelin görün"
+        case .turnOnNotifications:
+            return "Bildirimleri Aç"
+        case .notificationTime:
+            return "Bildirim Zamanı"
+        case .daysOfWeek:
+            return "Haftanın Günleri"
+        case .dailyNotification:
+            return "Günlük Bildirim"
+        case .selectedDays:
+            return "Seçili Günler"
+        case .selectedPoets:
+            return "Seçili Şairler"
+        case .notificationSettings:
+            return "Bildirim Ayarları"
+        case .notificationAccess:
+            return "Bildirim Erişimi"
+        case .ok:
+            return "Tamam"
+        case .enableNotificationsMessage:
+            return "Bildirimleri almak için lütfen cihaz ayarlarınızdan bildirim erişimini etkinleştirin."
         }
     }
     
@@ -377,6 +419,34 @@ enum LocalizationKey {
             return "App Version"
         case .biography:
             return "Biography"
+        case .noDaySelected:
+            return "No day selected"
+        case .noPoetSelected:
+            return "No poet selected"
+        case .poemReminder:
+            return "Poem Reminder"
+        case .poetThoughts:
+            return "Come and see what %@ thinks"
+        case .turnOnNotifications:
+            return "Turn On Notifications"
+        case .notificationTime:
+            return "Notification Time"
+        case .daysOfWeek:
+            return "Days of the Week"
+        case .dailyNotification:
+            return "Daily Notification"
+        case .selectedDays:
+            return "Selected Days"
+        case .selectedPoets:
+            return "Selected Poets"
+        case .notificationSettings:
+            return "Notification Settings"
+        case .notificationAccess:
+            return "Notification Access"
+        case .ok:
+            return "OK"
+        case .enableNotificationsMessage:
+            return "To receive notifications, please enable notification access in your device settings."
         }
     }
 } 
