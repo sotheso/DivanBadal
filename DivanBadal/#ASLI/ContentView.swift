@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var settings = AppSettings()
+    @StateObject private var languageManager = LanguageManager.shared
 
     var body: some View {
         NavigationStack {
@@ -17,18 +18,18 @@ struct ContentView: View {
                 TabView {
                     HomeView()
                         .tabItem {
-                            Label("‌Home", systemImage: "house.fill")
+                            Label(languageManager.localizedString(.home), systemImage: "house.fill")
                         }
 
                     SearchView()
                         .tabItem {
-                            Label("Search", systemImage: "magnifyingglass")
+                            Label(languageManager.localizedString(.search), systemImage: "magnifyingglass")
                         }
 
 
                     SettingView()
                         .tabItem {
-                            Label("Setting", systemImage: "gearshape.fill")
+                            Label(languageManager.localizedString(.settings), systemImage: "gearshape.fill")
                         }
                 }
                 .ignoresSafeArea(.container, edges: [.leading, .trailing])
@@ -40,6 +41,7 @@ struct ContentView: View {
             }
         }
         .environmentObject(settings)
+        .environmentObject(languageManager)
         .preferredColorScheme(settings.isDarkMode ? .dark : .light)
         .tint(Color("Color"))
     }

@@ -37,6 +37,26 @@ struct SettingView: View {
                     }
                     .listRowBackground(Color("Color Back"))
                     
+                    Section(header: Text(languageManager.localizedString(.language))) {
+                        ForEach(["English", "Turkish"], id: \.self) { language in
+                            HStack {
+                                Label(language == "English" ? "English" : "Türkçe", 
+                                      systemImage: language == "English" ? "e.square" : "t.square")
+                                    .foregroundStyle(Color("Color"))
+                                Spacer()
+                                if languageManager.currentLanguage == language {
+                                    Image(systemName: "checkmark")
+                                        .foregroundStyle(Color("Color"))
+                                }
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                languageManager.currentLanguage = language
+                            }
+                        }
+                    }
+                    .listRowBackground(Color("Color Back"))
+                    
                     Section(header: Text(languageManager.localizedString(.about))) {
                         NavigationLink(destination: AboutUsView()) {
                             Label(languageManager.localizedString(.about), systemImage: "info.circle.fill")
