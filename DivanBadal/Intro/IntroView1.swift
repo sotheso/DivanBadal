@@ -49,8 +49,8 @@ struct IntroView1: View {
                     .fill(
                         LinearGradient(
                             colors: [
-                                Color(red: 0.1, green: 0.1, blue: 0.2),
-                                Color(red: 0.2, green: 0.3, blue: 0.5)
+                                Color("Color intro2"),
+                                Color("Color intro1")
                             ],
                             startPoint: .top,
                             endPoint: .bottom
@@ -121,6 +121,11 @@ struct IntroView1: View {
                     .font(.title3)
                     .fontWeight(.semibold)
                     .contentShape(.rect)
+                    .padding(10)
+                    .background {
+                        Circle()
+                            .fill(Material.ultraThinMaterial)
+                    }
             }
             .opacity(activePage != .page1 ? 1 : 0)
             
@@ -132,6 +137,12 @@ struct IntroView1: View {
                 }
             }
             .fontWeight(.semibold)
+            .padding(.horizontal, 15)
+            .padding(.vertical, 8)
+            .background {
+                Capsule()
+                    .fill(Material.ultraThinMaterial)
+            }
             .opacity(activePage != .page4 ? 1 : 0)
         }
         .foregroundStyle(.white)
@@ -143,32 +154,61 @@ struct IntroView1: View {
     func LanguageSelectionView(selectedLanguage: Binding<String?>, languages: [String]) -> some View {
         VStack(spacing: 15) {
             ForEach(languages, id: \.self) { language in
-                Button {
-                    selectedLanguage.wrappedValue = language
-                    languageManager.currentLanguage = language
-                } label: {
-                    HStack {
-                        Text(language)
-                            .font(.title3)
-                            .foregroundColor(.white)
-                        
-                        Spacer()
-                        
-                        if selectedLanguage.wrappedValue == language {
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(.white)
-                        }
+                LanguageButton(
+                    language: language,
+                    isSelected: selectedLanguage.wrappedValue == language,
+                    action: {
+                        selectedLanguage.wrappedValue = language
+                        languageManager.currentLanguage = language
                     }
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(selectedLanguage.wrappedValue == language ? Color.white : Color.white.opacity(0.3), lineWidth: 2)
-                    )
-                }
+                )
             }
         }
         .padding(.horizontal)
+    }
+    
+    @ViewBuilder
+    private func LanguageButton(language: String, isSelected: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack {
+                Text(language)
+                    .font(.title3)
+                    .foregroundStyle(isSelected ? .white : .white.opacity(0.3))
+                
+                Spacer()
+                
+                if isSelected {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(.white)
+                }
+            }
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(isSelected ? 
+                        AnyShapeStyle(Material.ultraThinMaterial) : 
+                        AnyShapeStyle(Color("Color intro2").opacity(0.3)))
+                    .overlay {
+                        if isSelected {
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(
+                                    LinearGradient(
+                                        colors: [
+                                            .white.opacity(0.5),
+                                            .clear,
+                                            .white.opacity(0.2),
+                                            .clear
+                                        ],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 1
+                                )
+                        }
+                    }
+            }
+        }
     }
     
     @ViewBuilder
@@ -184,13 +224,36 @@ struct IntroView1: View {
         } label: {
             Text(activePage == .page4 ? "Start" : "Continue")
                 .contentTransition(.identity)
-                .foregroundStyle(.black)
+                .foregroundStyle(activePage == .page4 && selectedLanguage == nil ? .white.opacity(0.3) : .white)
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal)
                 .padding(.vertical, 12)
                 .frame(maxWidth: 370)
-                .background(activePage == .page4 && selectedLanguage == nil ? Color.gray : Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .background {
+                    if activePage == .page4 && selectedLanguage == nil {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color("Color intro2").opacity(0.3))
+                    } else {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.ultraThinMaterial)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(
+                                        LinearGradient(
+                                            colors: [
+                                                .white.opacity(0.5),
+                                                .clear,
+                                                .white.opacity(0.2),
+                                                .clear
+                                            ],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        ),
+                                        lineWidth: 1
+                                    )
+                            }
+                    }
+                }
         }
         .disabled(activePage == .page4 && selectedLanguage == nil)
         .padding(.bottom, 15)

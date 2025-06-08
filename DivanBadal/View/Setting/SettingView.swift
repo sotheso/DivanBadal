@@ -38,9 +38,9 @@ struct SettingView: View {
                     .listRowBackground(Color("Color Back"))
                     
                     Section(header: Text(languageManager.localizedString(.language))) {
-                        ForEach(["English", "Turkish"], id: \.self) { language in
+                        ForEach(["Türkçe", "English"], id: \.self) { language in
                             HStack {
-                                Label(language == "English" ? "English" : "Türkçe", 
+                                Label(language, 
                                       systemImage: language == "English" ? "e.square" : "t.square")
                                     .foregroundStyle(Color("Color"))
                                 Spacer()
