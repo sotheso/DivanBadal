@@ -21,7 +21,7 @@ extension Poet {
     static let samplePoets: [Poet] = [
         Poet(
             name: "Miguel de Cervantes",
-            imageName: "سروانتس",
+            imageName: "Cervantes",
             bioEnglish: "Spanish novelist, poet, and playwright. Best known for Don Quixote, considered the first modern European novel.",
             bioTurkish: "İspanyol romancı, şair ve oyun yazarı. En çok, ilk modern Avrupa romanı olarak kabul edilen Don Kişot ile tanınır.",
             works: ["Don Quixote", "Exemplary Novels"],
@@ -43,7 +43,7 @@ extension Poet {
         ),
         Poet(
             name: "John Keats",
-            imageName: "جان کیتس",
+            imageName: "John",
             bioEnglish: "English Romantic poet. His poetry is characterized by sensual imagery and is among the most popular of the Romantic movement.",
             bioTurkish: "İngiliz Romantik şair. Şiirleri duyusal imgelerle karakterize edilir ve Romantik hareketin en popüler eserleri arasındadır.",
             works: ["Odes", "Endymion"],
@@ -54,7 +54,7 @@ extension Poet {
         ),
         Poet(
             name: "Dante Alighieri",
-            imageName: "دانته آلیگیری",
+            imageName: "Dante",
             bioEnglish: "Italian poet, writer, and philosopher. Best known for The Divine Comedy, a masterpiece of world literature.",
             bioTurkish: "İtalyan şair, yazar ve filozof. Dünya edebiyatının başyapıtlarından biri olan İlahi Komedya ile tanınır.",
             works: ["The Divine Comedy", "La Vita Nuova"],
@@ -65,7 +65,7 @@ extension Poet {
         ),
         Poet(
             name: "Charles Baudelaire",
-            imageName: "شارل بودلر",
+            imageName: "Charles",
             bioEnglish: "French poet, translator, and critic. His most famous work, Les Fleurs du mal, expresses the changing nature of beauty in modern, industrializing Paris.",
             bioTurkish: "Fransız şair, çevirmen ve eleştirmen. En ünlü eseri Kötülük Çiçekleri, modern, sanayileşen Paris'te güzelliğin değişen doğasını ifade eder.",
             works: ["Les Fleurs du mal", "Le Spleen de Paris"],
@@ -76,7 +76,7 @@ extension Poet {
         ),
         Poet(
             name: "Pablo Neruda",
-            imageName: "پابلو نروا",
+            imageName: "Pablo",
             bioEnglish: "Chilean poet and diplomat. Winner of the Nobel Prize in Literature in 1971. His poetry is known for its passionate love poems and political commitment.",
             bioTurkish: "Şilili şair ve diplomat. 1971'de Nobel Edebiyat Ödülü'nü kazandı. Şiirleri tutkulu aşk şiirleri ve politik bağlılığı ile tanınır.",
             works: ["Twenty Love Poems", "Canto General"],
@@ -87,7 +87,7 @@ extension Poet {
         ),
         Poet(
             name: "Federico García Lorca",
-            imageName: "فدریکو گارسیا",
+            imageName: "Federico",
             bioEnglish: "Spanish poet, playwright, and theatre director. A member of the Generation of '27, he is considered one of the most important Spanish poets of the 20th century.",
             bioTurkish: "İspanyol şair, oyun yazarı ve tiyatro yönetmeni. 27 Kuşağı'nın bir üyesi olarak, 20. yüzyılın en önemli İspanyol şairlerinden biri olarak kabul edilir.",
             works: ["Blood Wedding", "Yerma"],
@@ -98,7 +98,7 @@ extension Poet {
         ),
         Poet(
             name: "Paul Valéry",
-            imageName: "پل والری",
+            imageName: "Paul",
             bioEnglish: "French poet, essayist, and philosopher. His poetry is characterized by its intellectual depth and formal perfection.",
             bioTurkish: "Fransız şair, deneme yazarı ve filozof. Şiirleri entelektüel derinliği ve biçimsel mükemmelliği ile karakterize edilir.",
             works: ["Le Cimetière marin", "Charmes"],
