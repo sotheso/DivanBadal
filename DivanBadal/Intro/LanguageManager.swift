@@ -119,6 +119,21 @@ enum LocalizationKey {
     case ok
     case enableNotificationsMessage
     
+    // AboutUsView
+    case aboutDivan
+    case aboutDivanDescription
+    case keyFeatures
+    case searchThroughPoems
+    case saveFavoritePoems
+    case sharePoems
+    case darkModeSupport
+    case contactUs
+    case contactEmail
+    
+    // New keys for the first intro page
+    case intro1Title
+    case intro1Description
+    
     func localizedString(for language: String) -> String {
         switch language {
         case "Turkish":
@@ -287,6 +302,44 @@ enum LocalizationKey {
             return "Tamam"
         case .enableNotificationsMessage:
             return "Bildirimleri almak için lütfen cihaz ayarlarınızdan bildirim erişimini etkinleştirin."
+            
+        // AboutUsView
+        case .aboutDivan:
+            return "Divan Hakkında"
+        case .aboutDivanDescription:
+            return """
+                Divan uygulaması, büyük şairlerin eserlerine kolay erişim sağlamak amacıyla tasarlanmış ve uygulanmıştır.
+
+                Bu versiyonda Cervantes, Shakespeare, Keats, Dante, Baudelaire, Neruda, García Lorca ve Valéry'nin şiirlerini okuyabilir ve arayabilirsiniz. Gelecek versiyonlarda daha fazla şair eklenecektir.
+
+                Temel Özellikler:
+                • Şiirlerde arama yapma
+                • Favori şiirleri kaydetme
+                • Şiirleri paylaşma
+                • Karanlık mod desteği
+
+                Öneriler ve geri bildirimler için bize ulaşabilirsiniz:
+                """
+        case .keyFeatures:
+            return "Temel Özellikler:"
+        case .searchThroughPoems:
+            return "• Şiirlerde arama yapma"
+        case .saveFavoritePoems:
+            return "• Favori şiirleri kaydetme"
+        case .sharePoems:
+            return "• Şiirleri paylaşma"
+        case .darkModeSupport:
+            return "• Karanlık mod desteği"
+        case .contactUs:
+            return "Öneriler ve geri bildirimler için bize ulaşabilirsiniz:"
+        case .contactEmail:
+            return "Sothesom@gmail.com"
+        
+        // New keys for the first intro page
+        case .intro1Title:
+            return "Avrupa'nın Şairleriyle Tanışın"
+        case .intro1Description:
+            return "Avrupa'nın en etkili şairlerinin hayatlarını ve miraslarını keşfedin. İlk yıllarından en büyük eserlerine kadar"
         }
     }
     
@@ -447,6 +500,44 @@ enum LocalizationKey {
             return "OK"
         case .enableNotificationsMessage:
             return "To receive notifications, please enable notification access in your device settings."
+            
+        // AboutUsView
+        case .aboutDivan:
+            return "About Divan"
+        case .aboutDivanDescription:
+            return """
+                The Divan application has been designed and implemented with the aim of providing easy access to the works of great poets.
+
+                In this version, you can read and search through the poems of Cervantes, Shakespeare, Keats, Dante, Baudelaire, Neruda, García Lorca, and Valéry. More poets will be added in future versions.
+
+                Key Features:
+                • Search through poems
+                • Save favorite poems
+                • Share poems
+                • Dark mode support
+
+                For suggestions and feedback, you can contact us:
+                """
+        case .keyFeatures:
+            return "Key Features:"
+        case .searchThroughPoems:
+            return "• Search through poems"
+        case .saveFavoritePoems:
+            return "• Save favorite poems"
+        case .sharePoems:
+            return "• Share poems"
+        case .darkModeSupport:
+            return "• Dark mode support"
+        case .contactUs:
+            return "For suggestions and feedback, you can contact us:"
+        case .contactEmail:
+            return "Sothesom@gmail.com"
+        
+        // New keys for the first intro page
+        case .intro1Title:
+            return "Meet European Poets"
+        case .intro1Description:
+            return "Discover the lives and legacies of Europe's most influential poets. From their early years to their greatest works"
         }
     }
 } 

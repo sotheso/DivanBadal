@@ -2,6 +2,7 @@ import SwiftUI
 
 struct FavoritePoetsView: View {
     @StateObject private var favoritesManager = FavoritePoetsManager()
+    @EnvironmentObject private var languageManager: LanguageManager
     let poets: [Poet]
     
     var favoritePoets: [Poet] {
@@ -16,10 +17,11 @@ struct FavoritePoetsView: View {
                         .font(.system(size: 48))
                         .foregroundStyle(.secondary)
                     
-                    Text("No poets have been added to your favorites yet.")                        .font(.headline)
+                    Text(languageManager.localizedString(.noPoetSelected))
+                        .font(.headline)
                         .foregroundStyle(.secondary)
                     
-                    Text("برای افزودن شاعران مورد علاقه، از صفحه پروفایل شاعر استفاده کنید")
+                    Text(languageManager.localizedString(.poetThoughts))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
@@ -53,7 +55,8 @@ struct FavoritePoetsView: View {
                 }
             }
         }
-        .navigationTitle("Favorite Poets")
+        .navigationTitle(languageManager.localizedString(.favoritePoets))
+        .localized()
     }
 }
 

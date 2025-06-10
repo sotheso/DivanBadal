@@ -18,9 +18,9 @@ enum IntroModel: String, CaseIterable{
         case .page1:
             "Welcome to Divan"
         case .page2:
-            "Smart Library"
+            "Meet European Poets"
         case .page3:
-            "Reader Community"
+            "Biographies & Works"
         case .page4:
             "Select App Language"
         }
@@ -31,9 +31,9 @@ enum IntroModel: String, CaseIterable{
         case .page1:
             "Experience the best reading journey with Divan"
         case .page2:
-            "Access thousands of books in one app"
+            "Discover the lives and legacies of Europe's most influential poets. From their early years to their greatest works."
         case .page3:
-            "Share your favorite books with friends"
+            "Access detailed biographies and explore the major works of each poet. Save your favorite poets and build your personal collection of literary knowledge."
         case .page4:
             "Please select your preferred language"
         }
