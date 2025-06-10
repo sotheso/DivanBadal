@@ -43,7 +43,7 @@ struct ContentView: View {
         .environmentObject(settings)
         .environmentObject(languageManager)
         .preferredColorScheme(settings.isDarkMode ? .dark : .light)
-        .tint(Color("Color"))
+        .tint(settings.isDarkMode ? .white : Color("Color"))
     }
 }
 

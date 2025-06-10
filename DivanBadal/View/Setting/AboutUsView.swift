@@ -12,7 +12,7 @@ struct AboutUsView: View {
                     .padding(.bottom)
                 
                 Text(languageManager.localizedString(.aboutDivanDescription))
-                    .padding(.bottom)
+                .padding(.bottom)
                 
                 Link(languageManager.localizedString(.contactEmail), destination: URL(string: "mailto:Sothesom@gmail.com")!)
                     .font(.headline)

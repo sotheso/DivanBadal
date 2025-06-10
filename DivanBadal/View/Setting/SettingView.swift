@@ -87,6 +87,7 @@ struct SettingView: View {
 
 struct FooterText: View {
     @EnvironmentObject private var languageManager: LanguageManager
+    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         VStack(spacing: 4) {
@@ -96,7 +97,7 @@ struct FooterText: View {
                     .font(.footnote)
                 
                 Link("Sothesom", destination: URL(string: "https://t.me/sothesom")!)
-                    .foregroundColor(Color("Color"))
+                    .foregroundColor(colorScheme == .dark ? .white : Color("Color"))
                     .font(.footnote)
             }
             Text("\(languageManager.localizedString(.appVersion)): 0.0.1")

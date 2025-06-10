@@ -21,11 +21,6 @@ struct FavoritePoetsView: View {
                         .font(.headline)
                         .foregroundStyle(.secondary)
                     
-                    Text(languageManager.localizedString(.poetThoughts))
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color(.systemGroupedBackground))
