@@ -77,156 +77,162 @@ struct AlarmView: View {
     
     var body: some View {
         NavigationView {
-            Form {
-                Section {
-                    Toggle(isOn: Binding(
-                        get: { settings.notificationsEnabled },
-                        set: { newValue in
-                            settings.notificationsEnabled = newValue
-                            if newValue {
-                                scheduleNotifications()
-                            } else {
-                                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            ZStack {
+                Color("Color Back")
+                    .ignoresSafeArea()
+                
+                Form {
+                    Section {
+                        Toggle(isOn: Binding(
+                            get: { settings.notificationsEnabled },
+                            set: { newValue in
+                                settings.notificationsEnabled = newValue
+                                if newValue {
+                                    scheduleNotifications()
+                                } else {
+                                    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                                }
                             }
-                        }
-                    )) {
-                        Label {
-                            Text(languageManager.localizedString(.turnOnNotifications))
-                        } icon: {
-                            Image(systemName: settings.notificationsEnabled ? "bell.fill" : "bell")
+                        )) {
+                            Label {
+                                Text(languageManager.localizedString(.turnOnNotifications))
+                            } icon: {
+                                Image(systemName: settings.notificationsEnabled ? "bell.fill" : "bell")
+                            }
                         }
                     }
-                }
-                
-                Section {
-                    DisclosureGroup(
-                        isExpanded: $showTimePicker,
-                        content: {
-                            DatePicker("", selection: $settings.dailyReminderTime, displayedComponents: .hourAndMinute)
-                                .datePickerStyle(.wheel)
-                                .labelsHidden()
-                                .environment(\.locale, Locale(identifier: "en_US"))
-                                .onChange(of: settings.dailyReminderTime) { _, _ in
-                                    if settings.notificationsEnabled {
-                                        scheduleNotifications()
-                                    }
-                                }
-                        },
-                        label: {
-                            HStack {
-                                Text(languageManager.localizedString(.notificationTime))
-                                Spacer()
-                                Text(selectedTimeText)
-                                    .foregroundStyle(.secondary)
-                            }
-                        }
-                    )
-                    .disabled(!settings.notificationsEnabled)
-                    .opacity(settings.notificationsEnabled ? 1.0 : 0.5)
-                }
-                
-                Section(header: Text(languageManager.localizedString(.daysOfWeek))) {
-                    Toggle(languageManager.localizedString(.dailyNotification), isOn: Binding(
-                        get: { settings.dailyNotification },
-                        set: { newValue in
-                            settings.dailyNotification = newValue
-                            if newValue {
-                                settings.selectedDays = Set(weekDays)
-                            } else {
-                                settings.selectedDays.removeAll()
-                            }
-                            if settings.notificationsEnabled {
-                                scheduleNotifications()
-                            }
-                        }
-                    ))
-                    .disabled(!settings.notificationsEnabled)
-                    .opacity(settings.notificationsEnabled ? 1.0 : 0.5)
                     
-                    DisclosureGroup(
-                        isExpanded: $showWeekDaysPicker,
-                        content: {
-                            ForEach(weekDays, id: \.self) { day in
-                                HStack {
-                                    Text(day)
-                                    Spacer()
-                                    if settings.selectedDays.contains(day) {
-                                        Image(systemName: "checkmark")
-                                            .foregroundStyle(.blue)
-                                    }
-                                }
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    if settings.selectedDays.contains(day) {
-                                        settings.selectedDays.remove(day)
-                                        if settings.selectedDays.isEmpty {
-                                            settings.dailyNotification = false
-                                        }
-                                    } else {
-                                        settings.selectedDays.insert(day)
-                                        if settings.selectedDays.count == weekDays.count {
-                                            settings.dailyNotification = true
+                    Section {
+                        DisclosureGroup(
+                            isExpanded: $showTimePicker,
+                            content: {
+                                DatePicker("", selection: $settings.dailyReminderTime, displayedComponents: .hourAndMinute)
+                                    .datePickerStyle(.wheel)
+                                    .labelsHidden()
+                                    .environment(\.locale, Locale(identifier: "en_US"))
+                                    .onChange(of: settings.dailyReminderTime) { _, _ in
+                                        if settings.notificationsEnabled {
+                                            scheduleNotifications()
                                         }
                                     }
-                                    if settings.notificationsEnabled {
-                                        scheduleNotifications()
-                                    }
-                                }
-                            }
-                        },
-                        label: {
-                            HStack {
-                                Text(languageManager.localizedString(.selectedDays))
-                                Spacer()
-                                Text(selectedDaysText)
-                                    .foregroundStyle(.secondary)
-                                    .multilineTextAlignment(.trailing)
-                            }
-                        }
-                    )
-                    .disabled(!settings.notificationsEnabled)
-                    .opacity(settings.notificationsEnabled ? 1.0 : 0.5)
-                }
-                
-                Section(header: Text(languageManager.localizedString(.favoritePoets))) {
-                    DisclosureGroup(
-                        isExpanded: $showPoetsPicker,
-                        content: {
-                            ForEach(poets, id: \.self) { poet in
+                            },
+                            label: {
                                 HStack {
-                                    Text(poet)
+                                    Text(languageManager.localizedString(.notificationTime))
                                     Spacer()
-                                    if settings.selectedPoets.contains(poet) {
-                                        Image(systemName: "checkmark")
-                                            .foregroundStyle(.blue)
-                                    }
-                                }
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    if settings.selectedPoets.contains(poet) {
-                                        settings.selectedPoets.remove(poet)
-                                    } else {
-                                        settings.selectedPoets.insert(poet)
-                                    }
-                                    if settings.notificationsEnabled {
-                                        scheduleNotifications()
-                                    }
+                                    Text(selectedTimeText)
+                                        .foregroundStyle(.secondary)
                                 }
                             }
-                        },
-                        label: {
-                            HStack {
-                                Text(languageManager.localizedString(.selectedPoets))
-                                Spacer()
-                                Text(selectedPoetsText)
-                                    .foregroundStyle(.secondary)
-                                    .multilineTextAlignment(.trailing)
+                        )
+                        .disabled(!settings.notificationsEnabled)
+                        .opacity(settings.notificationsEnabled ? 1.0 : 0.5)
+                    }
+                    
+                    Section(header: Text(languageManager.localizedString(.daysOfWeek))) {
+                        Toggle(languageManager.localizedString(.dailyNotification), isOn: Binding(
+                            get: { settings.dailyNotification },
+                            set: { newValue in
+                                settings.dailyNotification = newValue
+                                if newValue {
+                                    settings.selectedDays = Set(weekDays)
+                                } else {
+                                    settings.selectedDays.removeAll()
+                                }
+                                if settings.notificationsEnabled {
+                                    scheduleNotifications()
+                                }
                             }
-                        }
-                    )
-                    .disabled(!settings.notificationsEnabled)
-                    .opacity(settings.notificationsEnabled ? 1.0 : 0.5)
+                        ))
+                        .disabled(!settings.notificationsEnabled)
+                        .opacity(settings.notificationsEnabled ? 1.0 : 0.5)
+                        
+                        DisclosureGroup(
+                            isExpanded: $showWeekDaysPicker,
+                            content: {
+                                ForEach(weekDays, id: \.self) { day in
+                                    HStack {
+                                        Text(day)
+                                        Spacer()
+                                        if settings.selectedDays.contains(day) {
+                                            Image(systemName: "checkmark")
+                                                .foregroundStyle(Color("Color"))
+                                        }
+                                    }
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {
+                                        if settings.selectedDays.contains(day) {
+                                            settings.selectedDays.remove(day)
+                                            if settings.selectedDays.isEmpty {
+                                                settings.dailyNotification = false
+                                            }
+                                        } else {
+                                            settings.selectedDays.insert(day)
+                                            if settings.selectedDays.count == weekDays.count {
+                                                settings.dailyNotification = true
+                                            }
+                                        }
+                                        if settings.notificationsEnabled {
+                                            scheduleNotifications()
+                                        }
+                                    }
+                                }
+                            },
+                            label: {
+                                HStack {
+                                    Text(languageManager.localizedString(.selectedDays))
+                                    Spacer()
+                                    Text(selectedDaysText)
+                                        .foregroundStyle(.secondary)
+                                        .multilineTextAlignment(.trailing)
+                                }
+                            }
+                        )
+                        .disabled(!settings.notificationsEnabled)
+                        .opacity(settings.notificationsEnabled ? 1.0 : 0.5)
+                    }
+                    
+                    Section(header: Text(languageManager.localizedString(.favoritePoets))) {
+                        DisclosureGroup(
+                            isExpanded: $showPoetsPicker,
+                            content: {
+                                ForEach(poets, id: \.self) { poet in
+                                    HStack {
+                                        Text(poet)
+                                        Spacer()
+                                        if settings.selectedPoets.contains(poet) {
+                                            Image(systemName: "checkmark")
+                                                .foregroundStyle(Color("Color"))
+                                        }
+                                    }
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {
+                                        if settings.selectedPoets.contains(poet) {
+                                            settings.selectedPoets.remove(poet)
+                                        } else {
+                                            settings.selectedPoets.insert(poet)
+                                        }
+                                        if settings.notificationsEnabled {
+                                            scheduleNotifications()
+                                        }
+                                    }
+                                }
+                            },
+                            label: {
+                                HStack {
+                                    Text(languageManager.localizedString(.selectedPoets))
+                                    Spacer()
+                                    Text(selectedPoetsText)
+                                        .foregroundStyle(.secondary)
+                                        .multilineTextAlignment(.trailing)
+                                }
+                            }
+                        )
+                        .disabled(!settings.notificationsEnabled)
+                        .opacity(settings.notificationsEnabled ? 1.0 : 0.5)
+                    }
                 }
+                .scrollContentBackground(.hidden)
             }
             .navigationTitle(languageManager.localizedString(.notificationSettings))
             .navigationBarTitleDisplayMode(.inline)
@@ -234,7 +240,7 @@ struct AlarmView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: { dismiss() }) {
                         Image(systemName: "xmark")
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(Color("Color"))
                     }
                 }
             }

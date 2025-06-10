@@ -21,6 +21,7 @@ struct AboutUsView: View {
             }
             .padding()
         }
+        .background(Color("Color Back"))
         .navigationBarTitleDisplayMode(.inline)
         .localized()
     }
