@@ -2,6 +2,7 @@ import SwiftUI
 
 class AppSettings: ObservableObject {
     @Published var isDarkMode = false
+    @Published var useSystemAppearance = true
     @Published var fontSize: Double = 1.0
     @Published var isBoldFont = false
     @Published var favoritePoet: String = "Dante"
@@ -13,6 +14,7 @@ class AppSettings: ObservableObject {
     @Published var autoPlayAudio = false
     
     init() {
+        self.useSystemAppearance = UserDefaults.standard.bool(forKey: "useSystemAppearance")
         self.isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         self.fontSize = UserDefaults.standard.double(forKey: "fontSize")
         self.isBoldFont = UserDefaults.standard.bool(forKey: "isBoldFont")
@@ -31,6 +33,19 @@ class AppSettings: ObservableObject {
     // Font weight based on bold setting
     var fontWeight: Font.Weight {
         return isBoldFont ? .bold : .regular
+    }
+    
+    // Save settings to UserDefaults
+    func saveSettings() {
+        UserDefaults.standard.set(useSystemAppearance, forKey: "useSystemAppearance")
+        UserDefaults.standard.set(isDarkMode, forKey: "isDarkMode")
+        UserDefaults.standard.set(fontSize, forKey: "fontSize")
+        UserDefaults.standard.set(isBoldFont, forKey: "isBoldFont")
+        UserDefaults.standard.set(notificationsEnabled, forKey: "notificationsEnabled")
+        UserDefaults.standard.set(dailyNotification, forKey: "dailyNotification")
+        UserDefaults.standard.set(dailyReminderTime, forKey: "dailyReminderTime")
+        UserDefaults.standard.set(Array(selectedDays), forKey: "selectedDays")
+        UserDefaults.standard.set(Array(selectedPoets), forKey: "selectedPoets")
     }
 }
 

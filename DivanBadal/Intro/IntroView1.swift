@@ -24,6 +24,8 @@ struct IntroView1: View {
                 
                 VStack {
                     Spacer(minLength: 0)
+                    Spacer(minLength: 0)
+
                     IntroSymbolView(symbol: activePage.rawValue, config: .init(font: .system(size: 150, weight: .bold), frame: .init(width: 250, height: 200), radio:30, forgroudColor: .white))
                     
                     TexContents(size: size)
@@ -34,15 +36,37 @@ struct IntroView1: View {
                     }
                     
                     Spacer(minLength: 0)
-                    
                     IndicatorView()
+                        .padding(.bottom)
                     
                     ContinueButton()
+                    Spacer(minLength: 0)
                 }
                 .frame(maxWidth: .infinity)
                 .overlay(alignment: .top) {
                     HeaderView()
                 }
+                .gesture(
+                    DragGesture()
+                        .onEnded { gesture in
+                            let threshold: CGFloat = 50
+                            if gesture.translation.width > threshold {
+                                // Swipe right - go to previous page
+                                if activePage != .page1 {
+                                    withAnimation(.spring(duration: 0.5)) {
+                                        activePage = activePage.previousPage
+                                    }
+                                }
+                            } else if gesture.translation.width < -threshold {
+                                // Swipe left - go to next page
+                                if activePage != .page4 {
+                                    withAnimation(.spring(duration: 0.5)) {
+                                        activePage = activePage.nextPage
+                                    }
+                                }
+                            }
+                        }
+                )
             }
             .background{
                 Rectangle()
