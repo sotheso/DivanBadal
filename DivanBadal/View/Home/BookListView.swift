@@ -2,7 +2,7 @@
 //  BookListView.swift
 //  DivanTest
 //
-//  Created by Sothesom on 15/02/1404.
+//  Created by Sothesom
 //
 
 import SwiftUI

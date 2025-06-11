@@ -1,9 +1,3 @@
-// ProfileView شاعران
-// 1404/01/24
-
-
-
-
 import SwiftUI
 
 

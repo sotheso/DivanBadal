@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  TestDiv
 //
-//  Created by Sothesom on 22/12/1403.
+//  Created by Sothesom
 //
 
 import SwiftUI
@@ -34,7 +34,6 @@ struct HomeView: View {
                         .fontWeight(.bold)
                         .foregroundStyle(Color("Color"))
                 }
-//                .padding(.vertical, 12)
                 .padding(.bottom)
                 .padding(.horizontal)
                 

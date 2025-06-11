@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  TestDiv
 //
-//  Created by Sothesom on 25/01/1404.
+//  Created by Sothesom
 //
 
 import SwiftUI

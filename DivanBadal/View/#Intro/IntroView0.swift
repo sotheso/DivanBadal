@@ -2,7 +2,7 @@
 //  Intro.swift
 //  
 //
-//  Created by Sothesom on 09/10/1403.
+//  Created by Sothesom
 //
 
 import SwiftUI
