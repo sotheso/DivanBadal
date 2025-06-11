@@ -2,7 +2,7 @@
 //  SettingView.swift
 //  TestDiv
 //
-//  Created by Sothesom on 04/01/1404.
+//  Created by Sothesom
 //
 
 import SwiftUI

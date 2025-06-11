@@ -2,12 +2,12 @@
 //  SearchView.swift
 //  DivanBadal
 //
-//  Created by Sothesom on 21/12/1403.
+//  Created by Sothesom
 //
 
 import SwiftUI
 
-// کامپوننت جدید برای نمایش کارت کتاب در صفحه جستجو
+// New component to display book card on search page
 struct SearchBookCardView: View {
     let book: Book
     @Environment(\.colorScheme) var colorScheme
@@ -71,7 +71,7 @@ struct SearchView: View {
         self.selectedCategory = selectedCategory
     }
     
-    // تابع کمکی برای پیدا کردن شاعر مربوط به هر کتاب
+    // Helper function to find the poet for each book
     private func getPoetForBook(_ book: Book) -> Poet? {
         return Poet.samplePoets.first { $0.type == book.poetType }
     }
@@ -96,12 +96,12 @@ struct SearchView: View {
     
     var body: some View {
         ZStack {
-            // بکگراند اصلی
+            // Main background
             Color("Color Back")
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
-                // نوار جستجو
+                // Search bar
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundStyle(Color("Color"))
