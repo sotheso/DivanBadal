@@ -2,7 +2,7 @@
 //  DivanBadalApp.swift
 //  DivanBadal
 //
-//  Created by Sothesom on 04/03/1404.
+//  Created by Sothesom
 //
 
 import SwiftUI

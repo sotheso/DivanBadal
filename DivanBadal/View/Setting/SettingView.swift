@@ -16,7 +16,6 @@ struct SettingView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // بکگراند اصلی
                 Color("Color Back")
                     .ignoresSafeArea()
                 

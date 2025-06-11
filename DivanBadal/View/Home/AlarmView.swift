@@ -24,7 +24,7 @@ struct AlarmView: View {
         if settings.selectedDays.isEmpty {
             return languageManager.localizedString(.noDaySelected)
         } else {
-            return settings.selectedDays.sorted().joined(separator: "، ")
+            return settings.selectedDays.sorted().joined(separator: ", ")
         }
     }
     
@@ -32,7 +32,7 @@ struct AlarmView: View {
         if settings.selectedPoets.isEmpty {
             return languageManager.localizedString(.noPoetSelected)
         } else {
-            return settings.selectedPoets.sorted().joined(separator: "، ")
+            return settings.selectedPoets.sorted().joined(separator: ", ")
         }
     }
     
