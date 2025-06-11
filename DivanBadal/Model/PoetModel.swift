@@ -109,3 +109,81 @@ extension Poet {
         )
     ]
 } 
+
+
+
+enum PoetType: String {
+    case cervantes = "Cervantes"
+    case shakespeare = "Shakespeare"
+    case keats = "Keats"
+    case dante = "Dante"
+    case baudelaire = "Baudelaire"
+    case neruda = "Neruda"
+    case garcia = "Garcia"
+    case valery = "Valery"
+}
+
+// Add a new enum for poem categories
+enum PoemCategory: String, CaseIterable, Identifiable {
+    // Foreign poets categories
+    case cervantesDonQuixote
+    case cervantesNovelas
+    case shakespeareHamlet
+    case shakespeareMacbeth
+    case keatsOdes
+    case keatsEndymion
+    case danteDivineComedy
+    case danteVitaNuova
+    case baudelaireFleurs
+    case baudelaireSpleen
+    case nerudaVeintePoemas
+    case nerudaCantoGeneral
+    case garciaLorcaBodas
+    case garciaLorcaYerma
+    case valeryCimetiere
+    case valeryCharmes
+    
+    var id: String { self.rawValue }
+    var displayName: String {
+        switch self {
+        // Foreign poets display names
+        case .cervantesDonQuixote: return "Don Quixote"
+        case .cervantesNovelas: return "Exemplary Novels"
+        case .shakespeareHamlet: return "Hamlet"
+        case .shakespeareMacbeth: return "Macbeth"
+        case .keatsOdes: return "Keats' Odes"
+        case .keatsEndymion: return "Endymion"
+        case .danteDivineComedy: return "Divine Comedy"
+        case .danteVitaNuova: return "La Vita Nuova"
+        case .baudelaireFleurs: return "Les Fleurs du mal"
+        case .baudelaireSpleen: return "Le Spleen de Paris"
+        case .nerudaVeintePoemas: return "Twenty Love Poems"
+        case .nerudaCantoGeneral: return "Canto General"
+        case .garciaLorcaBodas: return "Blood Wedding"
+        case .garciaLorcaYerma: return "Yerma"
+        case .valeryCimetiere: return "Le Cimetière marin"
+        case .valeryCharmes: return "Charmes"
+        }
+    }
+    
+    var poetType: PoetType {
+        switch self {
+        case .cervantesDonQuixote, .cervantesNovelas:
+            return .cervantes
+        case .shakespeareHamlet, .shakespeareMacbeth:
+            return .shakespeare
+        case .keatsOdes, .keatsEndymion:
+            return .keats
+        case .danteDivineComedy, .danteVitaNuova:
+            return .dante
+        case .baudelaireFleurs, .baudelaireSpleen:
+            return .baudelaire
+        case .nerudaVeintePoemas, .nerudaCantoGeneral:
+            return .neruda
+        case .garciaLorcaBodas, .garciaLorcaYerma:
+            return .garcia
+        case .valeryCimetiere, .valeryCharmes:
+            return .valery
+        }
+    }
+}
