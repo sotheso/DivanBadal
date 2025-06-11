@@ -28,27 +28,6 @@ class BookModel: ObservableObject {
         
         // Load books based on PoemCategory
         for category in PoemCategory.allCases {
-            let jsonFileName: String
-            switch category {
-            // Foreign poets books
-            case .cervantesDonQuixote: jsonFileName = "DonQuixote"
-            case .cervantesNovelas: jsonFileName = "Novelas"
-            case .shakespeareHamlet: jsonFileName = "Hamlet"
-            case .shakespeareMacbeth: jsonFileName = "Macbeth"
-            case .keatsOdes: jsonFileName = "KeatsOdes"
-            case .keatsEndymion: jsonFileName = "Endymion"
-            case .danteDivineComedy: jsonFileName = "DivineComedy"
-            case .danteVitaNuova: jsonFileName = "VitaNuova"
-            case .baudelaireFleurs: jsonFileName = "FleursDuMal"
-            case .baudelaireSpleen: jsonFileName = "SpleenDeParis"
-            case .nerudaVeintePoemas: jsonFileName = "VeintePoemas"
-            case .nerudaCantoGeneral: jsonFileName = "CantoGeneral"
-            case .garciaLorcaBodas: jsonFileName = "BodasDeSangre"
-            case .garciaLorcaYerma: jsonFileName = "Yerma"
-            case .valeryCimetiere: jsonFileName = "CimetiereMarin"
-            case .valeryCharmes: jsonFileName = "Charmes"
-            }
-            
             let poetName: String
             let year: Int
             
