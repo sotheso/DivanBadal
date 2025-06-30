@@ -66,6 +66,11 @@ struct SettingView: View {
                             Label(languageManager.localizedString(.rateApp), systemImage: "star.fill")
                                 .foregroundStyle(Color("Color"))
                         }
+                        
+                        Link(destination: URL(string: "https" + "://sotheso.github.io/DivanBadal-Privacy-Policy/privacy-policy.html")!) {
+                            Label("Privacy Policy", systemImage: "lock.shield.fill")
+                                .foregroundStyle(Color("Color"))
+                        }
                     }
                     .listRowBackground(Color("Color Back"))
                 }
