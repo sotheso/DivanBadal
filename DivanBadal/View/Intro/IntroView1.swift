@@ -40,6 +40,11 @@ struct IntroView1: View {
                         .padding(.bottom)
                     
                     ContinueButton()
+                    
+                    if activePage == .page4 {
+                        PrivacyPolicyButton()
+                    }
+                    
                     Spacer(minLength: 0)
                 }
                 .frame(maxWidth: .infinity)
@@ -282,6 +287,20 @@ struct IntroView1: View {
         .disabled(activePage == .page4 && selectedLanguage == nil)
         .padding(.bottom, 15)
         .animation(.smooth(duration: 0.5, extraBounce: 0), value: activePage)
+    }
+    
+    @ViewBuilder
+    func PrivacyPolicyButton() -> some View {
+        Link(destination: URL(string: "https://sotheso.github.io/DivanBadal-Privacy-Policy/privacy-policy.html")!) {
+            HStack(spacing: 8) {
+                Image(systemName: "lock.shield.fill")
+                    .foregroundColor(.white.opacity(0.8))
+                Text("Privacy Policy")
+                    .foregroundColor(.white.opacity(0.8))
+                    .font(.footnote)
+            }
+            .padding(.top, 8)
+        }
     }
 }
 
