@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct DivanBadalApp: App {
-    @State private var isLoggedIn: Bool = false
+    @State private var isLoggedIn: Bool = UserDefaults.standard.bool(forKey: "isLoggedIn")
     @StateObject private var languageManager = LanguageManager.shared
     
     var body: some Scene {

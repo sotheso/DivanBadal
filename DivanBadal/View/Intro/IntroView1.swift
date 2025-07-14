@@ -246,6 +246,7 @@ struct IntroView1: View {
             if activePage == .page4 {
                 if selectedLanguage != nil {
                     isLoggedIn = true
+                    UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 }
             } else {
                 activePage = activePage.nextPage

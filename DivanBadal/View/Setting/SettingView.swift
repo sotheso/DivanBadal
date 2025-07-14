@@ -21,7 +21,13 @@ struct SettingView: View {
                 
                 List {
                     Section(header: Text(languageManager.localizedString(.appearance))) {
-                        Toggle(isOn: $appSettings.isDarkMode) {
+                        Toggle(isOn: Binding(
+                            get: { appSettings.isDarkMode },
+                            set: { newValue in
+                                appSettings.isDarkMode = newValue
+                                appSettings.saveSettings()
+                            }
+                        )) {
                             Label(languageManager.localizedString(.darkMode), systemImage: "moon.fill")
                                 .foregroundStyle(Color("Color"))
                         }
